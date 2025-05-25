@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import Work from '../models/work.model';
+import Work from '../models/work.model.js';
 
 export const getWork = async (req, res) => {  
   try {
@@ -23,6 +23,7 @@ export const createWork = async (req, res) => {
     await newWork.save();
     res.status(201).json({success:true, data:newWork})
   } catch (error) {
+    console.error('Error in create work: ', error.message)
     res.status(500).json({success:false, message:'Server Error'})
   }
 }
@@ -36,10 +37,10 @@ export const updateWork = async (req, res) => {
   }
   
   try {
-    const updateWork = await Work.findByIdAndUpdate(id, work, {new:true})
-    res.status(200).json({success:true, data:updateWork})
+    const updateWork = await Work.findByIdAndUpdate(id, work, { new: true });
+    res.status(200).json({ success: true, data: updateWork });
   } catch (error) {
-    res.status(500).json({success:false, message:'Server Error'})
+    res.status(500).json({ success: false, message: 'Server Error' });
   } 
   
 }

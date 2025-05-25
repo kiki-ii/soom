@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
-import workRoutes from './routes/work.route.js;'
+import workRoutes from './routes/work.route.js';
 import path from 'path';
 
 
@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 
-app.listen(5000, () => {
+app.listen(PORT, () => {
   connectDB();
   console.log('Server started at http://localhost:' + PORT);
 })
