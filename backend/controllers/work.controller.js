@@ -13,7 +13,7 @@ export const getWork = async (req, res) => {
 export const createWork = async (req, res) => {
   const work = req.body;  
   
-  if (!work.title || !work.descript || !work.thumbnail) {
+  if (!work.title || !work.descript ) {
     return res.status(400).json({success:false, message:'Please provide all fields'})
   }
   
@@ -27,6 +27,7 @@ export const createWork = async (req, res) => {
     res.status(500).json({success:false, message:'Server Error'})
   }
 }
+
 
 export const updateWork = async (req, res) => {
   const { id } = req.params;

@@ -1,0 +1,63 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&family=Noto+Sans+KR:wght@100..900&display=swap');
+
+
+:root {
+  --box-margin-top: 10rem;
+  --box-padding: 01.75rem 5rem;
+}
+
+
+body {  position: relative; font-family: "Noto Sans KR", sans-serif; scroll-behavior: smooth; }
+
+.gnb {  position: absolute;  left: 0;  top: 0;  z-index: 99;  width: 100%;  padding:01.75rem 5rem; }
+
+
+.hero { position: relative; }
+.hero_text {position: absolute; left: 0; bottom: 10%; font-family: "Montserrat", sans-serif; letter-spacing: -0.11rem; margin-left: 5rem;}
+.hero_text .name { font-weight: 500; text-transform: uppercase ; }
+.hero_text .title {font-weight: 700; line-height: 100%;}
+.hero_text .title span {font-weight: 300; }
+
+h2 {font-family: "Montserrat", sans-serif; letter-spacing: -0.11rem; font-size: 3.375rem; font-weight: 700; line-height: 100%;}
+.workcard_box { padding:var(--box-padding); margin-top: var(--box-margin-top);}
+.workcard_box h2 { margin-bottom: 3.75rem;}
+.workcard {height: 100%; }
+.workcard img {height: 100% !important;  }
+.workcard h3 {font-size: 1.5rem; }
+
+.skills_box {padding:var(--box-padding); margin-top: var(--box-margin-top);}
+.skills {width: 1315px; margin: 0 auto; margin-top: 5rem;}
+.skills p {font-size: 1.25rem;}
+
+
+
+.services_box { padding:var(--box-padding); padding-right: 0; margin-top: var(--box-margin-top);  }
+.services_box h2 {margin-bottom: 3.75rem;}
+.service {   overflow:auto; padding-bottom: 1rem;
+gap: 1.25rem; cursor: grab; touch-action: none; width: 100%; user-select: none; display: flex;}
+.servicecard  { min-width: 420px; height: 360PX; padding: 36px 52px;  display: flex; align-items: center ; justify-content: space-between; gap: 24px; }
+.servicecard img {width: 80px;}
+.servicecard h3 { font-size: 1.75rem; }
+.servicecard p {font-size: 1rem; }
+
+.service::-webkit-scrollbar {background-color: transparent; height: 4px; width: 4px; }
+.service::-webkit-scrollbar-thumb { background-color: rgba(0,0,0,0); transition: all 0.3s; }
+.service:hover::-webkit-scrollbar {height: 4px;  width: 4px; }
+.service:hover::-webkit-scrollbar-thumb { background-color: rgba(0,0,0,.2); border-radius: 5px;} 
+
+
+
+
+.about_box {padding:var(--box-padding); margin-top: var(--box-margin-top); display: flex; }
+.about_box > * {width: 50%;}
+.about_box p {font-size: 1.25rem;}
+
+
+.createform {flex-direction: row; align-items: center;}
+.createform label {width: 30%;}
+
+
+
+.footer { width: 100%; display: block; padding:01.75rem 5rem;}
+
