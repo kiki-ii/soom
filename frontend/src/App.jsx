@@ -1,12 +1,12 @@
 import { Route, Routes } from 'react-router-dom'
 import { Box, Theme} from '@chakra-ui/react'
-import { ColorModeProvider, LightMode } from "./components/ui/color-mode"
+import { ColorModeProvider, LightMode } from './components/ui/color-mode'
 import { Navbar } from './components/Navbar'
 import { HomePage } from './pages/HomePage'
-import { CreatePage } from './pages/CreatePage'
 import { Footer } from './components/Footer'
 
 import './App.css'
+import CreatePage from './pages/CreatePage'
 
 
 function App() {

@@ -11,7 +11,7 @@ const workSchema = mongoose.Schema(
       type: String,
       require: true,
     },
-    thumbnail: {
+    thumb: {
       type: String
     },
     image: {
