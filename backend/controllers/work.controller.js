@@ -55,7 +55,7 @@ export const getWork = async (req, res) => {
 
 export const createWork = async (req, res) => {
   const work = req.body;
-    if (!work.title || !work.descript ) {
+    if (!work.title || !work.descript || !work.thumb ) {
     return res.status(400).json({success:false, message:'Please provide all fields'})
   }
 

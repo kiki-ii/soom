@@ -6,7 +6,7 @@ import { HomePage } from './pages/HomePage'
 import { Footer } from './components/Footer'
 
 import './App.css'
-import CreatePage from './pages/CreatePage'
+// import CreatePage from './pages/CreatePage'
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path='/' element={<HomePage />} />
-            <Route path='/create' element={<CreatePage />} />
+            {/* <Route path='/create' element={<CreatePage />} /> */}
           </Routes>
           <Footer />
         </Box>        

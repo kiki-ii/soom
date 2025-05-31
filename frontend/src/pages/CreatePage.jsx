@@ -33,7 +33,7 @@ function CreatePage() {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { success, message } = await createWork(formData)
+  
     
     // if (!file) {
     //   alert('파일을 선택해 주세요')
@@ -41,36 +41,56 @@ function CreatePage() {
     // }
     
     const data = new FormData();
-    data.append('thumb', file);
-    data.append('image', file);
+    // const formValues = {
+    //   title: data.get('title'),
+    //   descript: data.get('descript')
+    // }  
+    
     data.append('title', formData.title);
     data.append('descript', formData.descript);
+    data.append('thumb', file);
+    data.append('image', file);
     data.append('tag', formData.tag);
     
-    try {
-      const response = await fetch('/api/works/upload', {
-        method: 'POST',
-        body: data
-      })
+    const { success, message } = await createWork(data);
+    if (!success) {
+          console.log('Error');
+          toaster.create({
+            description: message,
+            type: 'error',
+          });
+        } else {
+          console.log('Success');
+          toaster.create({
+            description: message,
+            type: 'success',
+          });
+        }
+    
+    // try {
+    //   const response = await fetch('/api/works/upload', {
+    //     method: 'POST',
+    //     body: data
+    //   })
       
-      if (!response.ok) {
-        throw new Error('업로드 실패');
-      }
+    //   if (!response.ok) {
+    //     throw new Error('업로드 실패');
+    //   }
       
-      const result = await response.json();
-      alert('업로드 성공: ' + result.message)
-      toaster.create({
-        description: message,
-        type: 'success',
-      });
-    } catch (error) {
-      console.error('업로드 오류 :', error);
-      alert('업로드 중 오류 발생')
-      toaster.create({
-        description: message,
-        type: 'error',
-      });
-    };
+    //   const result = await response.json();
+    //   alert('업로드 성공: ' + result.message)
+    //   toaster.create({
+    //     description: message,
+    //     type: 'success',
+    //   });
+    // } catch (error) {
+    //   console.error('업로드 오류 :', error);
+    //   alert('업로드 중 오류 발생')
+    //   toaster.create({
+    //     description: message,
+    //     type: 'error',
+    //   });
+    // };
   
   
   };
@@ -82,7 +102,7 @@ function CreatePage() {
       width='800px'
       display={'flex'}
       flexDir={'column'}
-      paddingTop='160px'
+      paddingTop='160px' 
     >
       <VStack>
         <Heading marginBottom='3rem'>Create New Work</Heading>

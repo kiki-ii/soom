@@ -4,22 +4,32 @@
 
 :root {
   --box-margin-top: 10rem;
-  --box-padding: 01.75rem 5rem;
+  --box-padding: 1.75rem 10rem;
+  --font-mont : "Montserrat", sans-serif;
 }
 
 
 body {  position: relative; font-family: "Noto Sans KR", sans-serif; scroll-behavior: smooth; }
 
-.gnb {  position: absolute;  left: 0;  top: 0;  z-index: 99;  width: 100%;  padding:01.75rem 5rem; }
+.gnb {  position: absolute;  left: 0;  top: 0;  z-index: 99;  width: 100%;  padding:var(--box-padding); }
+.gnb .logo {width: 60px; height: 60px;  background-image: url(./assets/images/logo_soom.svg) ; background-size: contain;}
+.blind {position: absolute; clip: rect(0 0 0 0); width: 1px; height: 1px; margin: -1px; overflow: hidden;}
+.gnb .nav_item {display: flex; gap: 3; font-size: 1.25rem; font-family: var(--font-mont); font-weight: 600;}
+.gnb .btn_top {position: fixed; right: 3%; bottom: -10%; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid #c7c7c7; z-index: 1000;
+  transition: bottom 0.5s cubic-bezier(.62,-0.35,.41,1.29); }
+.gnb .show {bottom: 3% !important;}
 
 
-.hero { position: relative; }
-.hero_text {position: absolute; left: 0; bottom: 10%; font-family: "Montserrat", sans-serif; letter-spacing: -0.11rem; margin-left: 5rem;}
+
+
+.hero { position: relative; display: flex; padding: var(--box-padding);}
+/* .hero_text {position: absolute; left: 0; bottom: 10%; font-family: "Montserrat", sans-serif; letter-spacing: -0.11rem; margin-left: 5rem;} */
+.hero_text {align-self: flex-end; margin-bottom: 5rem;  font-family: var(--font-mont); letter-spacing: -0.11rem; }
 .hero_text .name { font-weight: 500; text-transform: uppercase ; }
 .hero_text .title {font-weight: 700; line-height: 100%;}
 .hero_text .title span {font-weight: 300; }
 
-h2 {font-family: "Montserrat", sans-serif; letter-spacing: -0.11rem; font-size: 3.375rem; font-weight: 700; line-height: 100%;}
+h2 {font-family: var(--font-mont); letter-spacing: -0.11rem; font-size: 3.375rem; font-weight: 700; line-height: 100%;}
 .workcard_box { padding:var(--box-padding); margin-top: var(--box-margin-top);}
 .workcard_box h2 { margin-bottom: 3.75rem;}
 .workcard {height: 100%; }
@@ -27,8 +37,9 @@ h2 {font-family: "Montserrat", sans-serif; letter-spacing: -0.11rem; font-size: 
 .workcard h3 {font-size: 1.5rem; }
 
 .skills_box {padding:var(--box-padding); margin-top: var(--box-margin-top);}
+.skills_box_p {position: absolute; left: 50%; transform: translateX(-50%); font-size: 1.15rem;}
 .skills {width: 1315px; margin: 0 auto; margin-top: 5rem;}
-.skills p {font-size: 1.25rem;}
+.skills p {font-size: 1.25rem; }
 
 
 

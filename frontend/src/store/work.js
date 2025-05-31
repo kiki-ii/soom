@@ -4,7 +4,7 @@ export const useWorkStore = create(set => ({
   works: [],
   setWorks: works => set({ works }),
   createWork: async newWork => {
-    if (!newWork.title || !newWork.descript) {
+    if (!newWork.title || !newWork.descript || !newWork.thumb) {
       return { success: false, message: 'Please fill in all fields' };
     }
     
@@ -12,6 +12,7 @@ export const useWorkStore = create(set => ({
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
+        //'Content-Type': 'multipart/form-data'
       },
       body: JSON.stringify(newWork)
     })
@@ -19,7 +20,7 @@ export const useWorkStore = create(set => ({
 
     set(state => ({ works: [...state.works, data.data] }));
 
-    return { success: true, message: "Works created successfully" };
+    return { success: true, message: 'Works created successfully' };
   },
   
   fetchWorks: async () => {
@@ -60,9 +61,6 @@ export const useWorkStore = create(set => ({
     return { success: true, message: data.message };
   }
   
-  // uploadWorkFile: async () => {
-
-  // }
 
 }))
 

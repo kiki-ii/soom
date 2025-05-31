@@ -1,20 +1,23 @@
-import {  Box,  Grid,  GridItem,  Heading,  HStack,  Image,  Text,  Wrap,} from '@chakra-ui/react';
+import { Box, Grid, GridItem, Heading, HStack, Image, Text, Wrap, } from '@chakra-ui/react';
+
 import {WorkCard} from '../components/WorkCard';
 import {ServiceCard} from '../components/ServiceCard';
 import {useDragScroll} from '../hooks/useDragScroll.js';
 
-import service from '../store/service.js';
+
 import { useWorkStore } from '../store/work';
+import { useServiceStore } from '../store/service';
 import { useEffect } from 'react';
 
 export const HomePage = () => {
-  const services = service;
-  
+
+  const {fetchServices, services } = useServiceStore();
   const { fetchWorks, works } = useWorkStore();
   
   useEffect(() => {
     fetchWorks();
-  }, [fetchWorks]);
+    fetchServices();
+  }, [fetchWorks, fetchServices]);
   
   
   const [ref] = useDragScroll();
@@ -27,6 +30,8 @@ export const HomePage = () => {
     // note that this does not include files in subdirectories
     return new URL(`../assets/images/${name}`, import.meta.url).href;
   }
+  
+
 
   
 
@@ -45,44 +50,47 @@ export const HomePage = () => {
           </Text>
         </Box>
       </Box>
-      <Box className='workcard_box'>
+      <Box id='work' className='workcard_box'>
         <Heading>Work</Heading>
         <Grid
-          templateRows='repeat(5, 1fr)'
+          templateRows='repeat(2, 1fr)'
           templateColumns='repeat(3, 1fr)'
           gap={4}
         >
+        
           {works.map(work => (
           <GridItem rowSpan={2} key={work._id} >
-            <WorkCard  key={work._id} work={work} />            
+            <WorkCard  work={work} />            
           </GridItem>
           ))}
-          {/* <GridItem rowSpan={2}>
-            <WorkCard work={works[0]} />            
+          
+          {/*
+          <GridItem rowSpan={2}>
+            <WorkCard key={work._id} work={work}/>            
           </GridItem>
-          <GridItem rowSpan={3}>
-            <WorkCard work={works[1]}/>
+           <GridItem rowSpan={3}>
+            <WorkCard />
           </GridItem>
           <GridItem rowSpan={2}>
-            <WorkCard work={works[2]}/>
+            <WorkCard />
           </GridItem>
           <GridItem rowSpan={3}>
-            <WorkCard work={works[3]}/>
+            <WorkCard />
           </GridItem>
           <GridItem rowSpan={3}>
-            <WorkCard work={works[4]}/>
+            <WorkCard />
           </GridItem>
           <GridItem rowSpan={2}>
-            <WorkCard work={works[5]}/>
+            <WorkCard />
           </GridItem> */}
         </Grid>
       </Box>
 
       {/* Skills */}
-      <Box className='skills_box'>
-        <HStack>
+      <Box id='skills' className='skills_box'>
+        <HStack position='relative'>
           <Heading>Skills</Heading>
-          <Text>The skills, tools and technologies I use : </Text>
+          <Text className='skills_box_p'>The skills, tools and technologies I use : </Text>
         </HStack>
         <Grid
           className='skills'
@@ -146,17 +154,17 @@ export const HomePage = () => {
       </Box>
 
       {/* Services */}
-      <Box className='services_box'>
+      <Box id='services' className='services_box'>
         <Heading>Services</Heading>
         <Box className='service' ref={ref}>
           {services.map(service => (
-            <ServiceCard key={service.id} service={service} />
+            <ServiceCard key={service._id} service={service} />
           ))}
         </Box>
       </Box>
 
       {/* About */}
-      <Box className='about_box'>
+      <Box id='about' className='about_box'>
         <Heading>About</Heading>
         <Text>
           안녕하세요. 디자인과 퍼블리싱에 대한 10년 이상의 경력을 가진 UI/UX
@@ -177,7 +185,7 @@ export const HomePage = () => {
           있습니다.
         </Text>
       </Box>
-      <Box h='1000px'>test</Box>
+      <Box h='500px'></Box>
     </Box>
   );
 };

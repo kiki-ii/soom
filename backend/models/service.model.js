@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
 
-
-const workSchema = mongoose.Schema(
-  {
+const serviceSchema = mongoose.Schema(
+  {    
     title: {
       type: String,
       require: true,
@@ -11,15 +10,9 @@ const workSchema = mongoose.Schema(
       type: String,
       require: true,
     },
-    thumb: {
+    iconimg: {
       type: String,
       require: true,
-    },
-    image: {
-      type: [String], 
-    },
-    tag: {
-      type: [String], 
     },
   },
   {
@@ -27,7 +20,6 @@ const workSchema = mongoose.Schema(
   }
 );
 
+const Service = mongoose.model('Service', serviceSchema);
 
-const Work = mongoose.model('Work', workSchema);
-
-export default Work;
+export default Service;
