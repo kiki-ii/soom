@@ -1,4 +1,4 @@
-import { Badge, Card, HStack, Image } from '@chakra-ui/react'
+import { Badge, Box, Card, HStack, Image } from '@chakra-ui/react'
 
 
 
@@ -7,17 +7,25 @@ export const WorkCard = ({ work }) => {
   function getImageUrl(name) {  
     return new URL(`../assets/images/work/${name}`, import.meta.url).href;
   }
-  // console.log('work :', work.map(w => <p>{ w.title }</p>));
+  const workImg = {
+    width: '100%',
+    height: '100%',
+    backgroundImage: `url(${getImageUrl(work.thumb)})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+  };
+  
   
   return (
-    <Card.Root className="workcard" border={'none'} key={work._id}>
-      <Image src={getImageUrl(work.thumb)} alt={work.title} />
+    <Card.Root  border={'none'} key={work._id} h='100%'>
+      {/* <Image src={getImageUrl(work.thumb)} alt={work.title} /> */}
+      <Box className='work_img' style={workImg} ></Box>
       
-      <Card.Body gap="3">
+      <Card.Body gap="2" className='workcard_body' >
         <Card.Title>{work.title}</Card.Title>
-        <HStack mt="2">
+        <HStack mt="2" >
           {work.tag.map(t => (
-          <Badge size="lg" key={t._id}>{t}</Badge>
+          <Badge size="lg" key={t}>{t}</Badge>
           ))}
         </HStack>
       </Card.Body>

@@ -1,9 +1,9 @@
-import { Box, Grid, GridItem, Heading, HStack, Image, Text, Wrap, } from '@chakra-ui/react';
+import { Box, For, Grid, GridItem, Heading, HStack, Image, Text, Wrap, } from '@chakra-ui/react';
 
 import {WorkCard} from '../components/WorkCard';
 import {ServiceCard} from '../components/ServiceCard';
 import {useDragScroll} from '../hooks/useDragScroll.js';
-
+import product from '../store/portfolio.js';
 
 import { useWorkStore } from '../store/work';
 import { useServiceStore } from '../store/service';
@@ -13,7 +13,7 @@ export const HomePage = () => {
 
   const {fetchServices, services } = useServiceStore();
   const { fetchWorks, works } = useWorkStore();
-  
+  const products = product;
   useEffect(() => {
     fetchWorks();
     fetchServices();
@@ -31,14 +31,15 @@ export const HomePage = () => {
     return new URL(`../assets/images/${name}`, import.meta.url).href;
   }
   
-
+  
+  
 
   
 
   return (
     <Box w={'100%'} display={'flex'} flexDir={'column'}>
-      {/* Hero section */}
-      <Box className='hero' bg={'pink.100'} w={'100%'} h={'100vh'}>
+      {/* HERO section */}
+      <Box className='hero' bg={'pink.100'} w={'100%'} h={'100vh'} padding={{ base: '0rem 1rem', xl:'1.75rem 10rem', lg: '1rem 6rem', md: '0rem 3rem'}}>
         <Box className='hero_text'>
           <Text className='name' fontSize={'3xl'}>
             Lee soo min
@@ -50,53 +51,43 @@ export const HomePage = () => {
           </Text>
         </Box>
       </Box>
-      <Box id='work' className='workcard_box'>
+      
+      {/* WORK */}
+      <Box id='work' className='workcard_box' padding={{ base: '0rem 1rem', xl:'1.75rem 10rem', lg: '1rem 6rem', md: '0rem 3rem'}}>
         <Heading>Work</Heading>
-        <Grid
-          templateRows='repeat(2, 1fr)'
-          templateColumns='repeat(3, 1fr)'
-          gap={4}
+        <Grid h={{base:'auto', xl: '1100px'}} 
+          templateRows={{base:'repeat(6, 1fr)',md:'repeat(3, 1fr)', lg:'repeat(5, 1fr)'}}
+          templateColumns={{base:'repeat(1, 1fr)' ,md:'repeat(2, 1fr)' ,lg:'repeat(3, 1fr)'}}
+          gap={3}
+          className='grid_work'
         >
-        
-          {works.map(work => (
-          <GridItem rowSpan={2} key={work._id} >
-            <WorkCard  work={work} />            
-          </GridItem>
-          ))}
           
-          {/*
-          <GridItem rowSpan={2}>
-            <WorkCard key={work._id} work={work}/>            
+          {/* {works.map(work => (
+          <GridItem className='workcard' key={work._id}  >
+            <WorkCard key={work._id}  work={work} />            
           </GridItem>
-           <GridItem rowSpan={3}>
-            <WorkCard />
+          ))}           */}
+          {products.map(product => (
+          <GridItem className='workcard' key={product.id}  >
+            <WorkCard key={product.id}  work={product} />            
           </GridItem>
-          <GridItem rowSpan={2}>
-            <WorkCard />
-          </GridItem>
-          <GridItem rowSpan={3}>
-            <WorkCard />
-          </GridItem>
-          <GridItem rowSpan={3}>
-            <WorkCard />
-          </GridItem>
-          <GridItem rowSpan={2}>
-            <WorkCard />
-          </GridItem> */}
+          ))}    
+          
         </Grid>
       </Box>
 
-      {/* Skills */}
-      <Box id='skills' className='skills_box'>
-        <HStack position='relative'>
+      {/* SKILLS */}
+      <Box id='skills' className='skills_box' padding={{ base: '0rem 1rem',md: '0rem 3rem',  lg: '1rem 4rem', xl:'1.75rem 10rem'}}>
+        <HStack position='relative' display={{base:'block', lg:'flex'}}>
           <Heading>Skills</Heading>
-          <Text className='skills_box_p'>The skills, tools and technologies I use : </Text>
+          <Text position={{base:'relative', lg:'absolute'}} marginTop={{base:'1rem', lg:'0'}} className='skills_box_p'>The skills, tools and technologies I use : </Text>
         </HStack>
+        
         <Grid
-          className='skills'
-          templateRows='repeat(3, 1fr)'
-          templateColumns='repeat(6, 1fr)'
-          gap={6}
+          className='skills' paddingX={{base:'4%', lg:'10%', xl:'8%'}}
+          templateRows={{base: 'repeat(6, 1fr)',lg:'repeat(5, 1fr)', xl:'repeat(3, 1fr)' }}
+          templateColumns={{base: 'repeat(2, 1fr)',lg:'repeat(3, 1fr)', xl:'repeat(6, 1fr)'}}
+          gap={6} fontSize={{base:'1rem',md:'1.125rem', lg:'1.25rem'}}
         >
           <HStack>
             <Image src={getImageUrl('icon_html.svg')} alt='html' />
@@ -153,8 +144,8 @@ export const HomePage = () => {
         </Grid>
       </Box>
 
-      {/* Services */}
-      <Box id='services' className='services_box'>
+      {/* SERVICES */}
+      <Box id='services' className='services_box' padding={{ base: '0rem 1rem', xl:'1.75rem 10rem', lg: '1rem 6rem', md: '0rem 3rem'}}>
         <Heading>Services</Heading>
         <Box className='service' ref={ref}>
           {services.map(service => (
@@ -163,10 +154,10 @@ export const HomePage = () => {
         </Box>
       </Box>
 
-      {/* About */}
-      <Box id='about' className='about_box'>
+      {/* ABOUT */}
+      <Box id='about' className='about_box' padding={{ base: '0rem 1rem', xl:'1.75rem 10rem', lg: '1rem 6rem', md: '0rem 3rem'}} display={{base: 'block', lg:'flex'}}>
         <Heading>About</Heading>
-        <Text>
+        <Text width={{base:'auto', lg: '55%'}} paddingTop={{base:'2rem', lg:'0'}} fontSize={{base: '1.125rem', lg:'1.375rem'}}>
           안녕하세요. 디자인과 퍼블리싱에 대한 10년 이상의 경력을 가진 UI/UX
           디자이너 이수민입니다.
           <br />

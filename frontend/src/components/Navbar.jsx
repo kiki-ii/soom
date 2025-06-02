@@ -1,8 +1,10 @@
 import { Box, Button, HStack, Icon, Image } from '@chakra-ui/react'
 import { useEffect, useState } from 'react';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
-import { TfiLock, TfiUnlock, TfiPlus, TfiArrowUp  } from 'react-icons/tfi';
+import { TfiLock, TfiUnlock, TfiPlus, TfiArrowUp } from 'react-icons/tfi';
+import { IoMdMenu } from "react-icons/io";
 import { Link } from 'react-router-dom';
+import { SideMenu } from './SideMenu';
 
 export const Navbar = () => {
   const [showBtn, setShowBtn] = useState(false);
@@ -24,14 +26,15 @@ export const Navbar = () => {
   
   
   return (
-    <nav id='top' className='gnb'>
-      <Box w={'full'} display={'flex'} justifyContent={'space-between'}>
+    <Box id='top' className='gnb' padding={{ base: '1rem 1rem', xl:'1.75rem 10rem', lg: '1rem 6rem', md: '1rem 3rem'}}>
+      <Box w={'full'} display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
         <Link to='/'>
-          <div className='logo '><p className='blind'>Soom Logo</p>  
-          </div>
+          <Box className='logo ' w={{base: '48px', lg: '60px'}} h={{base: '48px', lg: '60px'}} ><p className='blind'>Soom Logo</p>  
+          </Box>
         
         </Link>
-        <HStack className='nav_item' gap='16'>
+        
+        <HStack className='nav_item' gap='16' display={{base:'none', lg:'flex'}}>
           <AnchorLink href='#work'>Work</AnchorLink>
           <AnchorLink href='#skills'>Skills</AnchorLink>
           <AnchorLink href='#services'>Services</AnchorLink>
@@ -46,11 +49,14 @@ export const Navbar = () => {
             </Icon>
           </Link> */}
         </HStack>
+        <SideMenu />
+        
       </Box>
       
-      <AnchorLink href='#top' className={showBtn ? 'btn_top show' : 'btn_top'} >
+      <a href='#top' animation="bounce" className={showBtn ? 'btn_top show' : 'btn_top'} >
         <TfiArrowUp />
-      </AnchorLink>
-    </nav>
+      </a>
+      
+    </Box>
   )
 }
