@@ -8,6 +8,7 @@ import product from '../store/portfolio.js';
 import { useWorkStore } from '../store/work';
 import { useServiceStore } from '../store/service';
 import { useEffect } from 'react';
+import { WorkPopup } from '../components/WorkPopup.jsx';
 
 export const HomePage = () => {
 
@@ -31,15 +32,11 @@ export const HomePage = () => {
     return new URL(`../assets/images/${name}`, import.meta.url).href;
   }
   
-  
-  
-
-  
 
   return (
     <Box w={'100%'} display={'flex'} flexDir={'column'}>
       {/* HERO section */}
-      <Box className='hero' bg={'pink.100'} w={'100%'} h={'100vh'} padding={{ base: '0rem 1rem', xl:'1.75rem 10rem', lg: '1rem 6rem', md: '0rem 3rem'}}>
+      <Box className='hero' w={'100%'} h={'100vh'} padding={{ base: '0rem 1rem', xl:'1.75rem 10rem', lg: '1rem 6rem', md: '0rem 3rem'}}>
         <Box className='hero_text'>
           <Text className='name' fontSize={'3xl'}>
             Lee soo min
@@ -58,20 +55,17 @@ export const HomePage = () => {
         <Grid h={{base:'auto', xl: '1100px'}} 
           templateRows={{base:'repeat(6, 1fr)',md:'repeat(3, 1fr)', lg:'repeat(5, 1fr)'}}
           templateColumns={{base:'repeat(1, 1fr)' ,md:'repeat(2, 1fr)' ,lg:'repeat(3, 1fr)'}}
-          gap={3}
+          gap={6}
           className='grid_work'
         >
-          
-          {/* {works.map(work => (
-          <GridItem className='workcard' key={work._id}  >
-            <WorkCard key={work._id}  work={work} />            
-          </GridItem>
-          ))}           */}
+                    
           {products.map(product => (
-          <GridItem className='workcard' key={product.id}  >
-            <WorkCard key={product.id}  work={product} />            
+            <GridItem className='workcard' key={product.id}  >
+              <WorkPopup key={product.id}  work={product} />
+            {/* <WorkCard key={product.id}  work={product} />             */}
           </GridItem>
-          ))}    
+          ))}  
+          
           
         </Grid>
       </Box>

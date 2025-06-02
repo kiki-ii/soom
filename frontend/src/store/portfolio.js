@@ -5,7 +5,7 @@ const product = [
     title: 'funiture commerce',
     descript: 'quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ',
     thumb: 'work_01.png',
-    image: ['image', 'image'],
+    image: ['work_01_01.png', 'work_01_02.png'],
     tag:['UI/UX Design', 'Web Design']
   },
   {
@@ -44,7 +44,7 @@ const product = [
     id: 6,
     title: '관공서 웹사이트',
     descript: 'quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ',
-    thumb: 'work_06.png',
+    thumb: 'work_07.png',
     image: ['image', 'image'],
     tag:['UI/UX Design', 'Responsive']
   },

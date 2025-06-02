@@ -7,6 +7,7 @@
   --box-padding: 1.75rem 10rem;
   --font-mont : "Montserrat", sans-serif;
   --title-mb : 3rem;
+  --bounce : cubic-bezier(.62,-0.35,.41,1.29);
 }
 
 
@@ -17,7 +18,7 @@ body {  position: relative; font-family: "Noto Sans KR", sans-serif; scroll-beha
 .blind {position: absolute; clip: rect(0 0 0 0); width: 1px; height: 1px; margin: -1px; overflow: hidden;}
 .gnb .nav_item { font-size: 1.25rem; font-family: var(--font-mont); font-weight: 600;}
 .gnb .btn_top {position: fixed; right: 3%; bottom: -10%; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid #c7c7c7; z-index: 1000;
-  transition: bottom 0.5s cubic-bezier(.62,-0.35,.41,1.29); }
+  transition: bottom 0.5s var(--bounce); }
 .gnb .show {bottom: 3% !important;}
 
 
@@ -35,20 +36,30 @@ h2 {font-family: var(--font-mont); letter-spacing: -0.11rem; font-size: 3.375rem
 .workcard_box {  margin-top: var(--box-margin-top);}
 .workcard_box h2 { margin-bottom: var(--title-mb);}
 .workcard_box .grid_work {align-items: stretch; }
-/* .workcard {align-self: stretch;} */
-/* .grid_work .workcard:nth-child(1) {grid-row:span 2;}
-.grid_work .workcard:nth-child(2) {grid-row:span 3;}
-.grid_work .workcard:nth-child(3) {grid-row:span 2;}
-.grid_work .workcard:nth-child(4) {grid-row:span 3;}
-.grid_work .workcard:nth-child(5) {grid-row:span 3;}
-.grid_work .workcard:nth-child(6) {grid-row:span 3;} */
 
-
-.workcard {height: 100%; min-height: 400px;  }
-.workcard img {width: 100%; height: 100%; object-fit: cover;}
-.workcard .work_img {width: 100%; height: 100%; }
+.workcard {height: 100%; min-height: 400px; transition: all .3s ease-in-out; overflow: hidden; }
+.workcard:hover, .workcard:focus {z-index: 1; scale: 1.1; border-radius: 36px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 
+              0 2px 4px rgba(0,0,0,0.04), 
+              0 4px 8px rgba(0,0,0,0.04), 
+              0 8px 16px rgba(0,0,0,0.04),
+              0 16px 32px rgba(0,0,0,0.04), 
+              0 32px 64px rgba(0,0,0,0.04);
+}
+  /* 
+  box-shadow: -4px -4px 8px 3px rgba(255,183,112,0.3), 0px 16px 32px 3px rgba(255,89,238,0.3); 
+  box-shadow: 0 1px 2px rgba(255,183,112,0.07), 
+              0 2px 4px rgba(255,183,112,0.07), 
+              0 4px 8px rgba(0255,183,112,0.07), 
+              0 8px 16px rgba(255,89,238,0.1),
+              0 16px 32px rgba(255,89,238,0.1), 
+              0 32px 64px rgba(255,89,238,0.1); */
+/* .workcard img {width: 100%; height: 100%; object-fit: contain; } */
+.workcard .work_img {width: 100%; height: 100%; filter: grayscale(50%);}
 .workcard h3 {font-size: 1.5rem; }
-.workcard_body {display: flex; height: 130px; }
+.workcard:hover .work_img {filter: grayscale(0%);}
+.workcard .workcard_body {width: 100%; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px);  position: absolute; bottom: 0; transition: 0.3s ease-in-out}
+.workcard:hover .workcard_body {bottom: -200px; }
 
 
 /*=== SKILLS ===*/

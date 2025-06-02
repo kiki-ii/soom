@@ -1,8 +1,12 @@
 import { Badge, Box, Card, HStack, Image } from '@chakra-ui/react'
 
 
-
-export const WorkCard = ({ work }) => {
+export const WorkCard = ({ work, setOpen }) => {
+  // const [isOpen, setIsOpen] = useState(false);
+    
+  const handleOpen = ()=> {
+    setOpen(true)
+  }
   
   function getImageUrl(name) {  
     return new URL(`../assets/images/work/${name}`, import.meta.url).href;
@@ -17,10 +21,9 @@ export const WorkCard = ({ work }) => {
   
   
   return (
-    <Card.Root  border={'none'} key={work._id} h='100%'>
-      {/* <Image src={getImageUrl(work.thumb)} alt={work.title} /> */}
-      <Box className='work_img' style={workImg} ></Box>
-      
+    
+    <Card.Root  border={'none'} key={work._id} h='100%' >      
+      <Box className='work_img' style={workImg} onClick={handleOpen}></Box>      
       <Card.Body gap="2" className='workcard_body' >
         <Card.Title>{work.title}</Card.Title>
         <HStack mt="2" >
