@@ -12,11 +12,13 @@
   "dependencies": {
     "@chakra-ui/react": "^3.19.1",
     "@emotion/react": "^11.14.0",
+    "gsap": "^3.13.0",
     "next-themes": "^0.4.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.0",
+    "splitting": "^1.1.0",
     "zustand": "^5.0.5"
   },
   "devDependencies": {

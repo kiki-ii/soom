@@ -15,7 +15,7 @@ function App() {
   return (   
     <ColorModeProvider forcedTheme="light">
       <Theme appearance="light">      
-        <Box  w={'full'} minH={'100vh'}>
+        <Box  w={'full'} minH={'100vh'} className='gradient_bg'>
           <Navbar />
           <Routes>
             <Route path='/' element={<HomePage />} />
