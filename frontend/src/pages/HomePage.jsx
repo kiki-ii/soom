@@ -7,7 +7,7 @@ import product from '../store/portfolio.js';
 
 import { useWorkStore } from '../store/work';
 import { useServiceStore } from '../store/service';
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect,  useLayoutEffect,  useRef } from 'react';
 import { WorkPopup } from '../components/WorkPopup.jsx';
 import { Bg } from '../components/Bg.jsx';
 
@@ -16,14 +16,16 @@ import { SplitText } from "gsap/SplitText";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
+
 export const HomePage = () => {
 
   const {fetchServices, services } = useServiceStore();
   const { fetchWorks, works } = useWorkStore();
   const products = product;
   
-  gsap.registerPlugin(SplitText);
-  gsap.registerPlugin(ScrollTrigger);
+  const containerRef = useRef();
+  
+
   
   useEffect(() => {
     fetchWorks();
@@ -53,6 +55,8 @@ export const HomePage = () => {
     </div>
   );
   }  
+  
+  
 
 
   useLayoutEffect(() => {   
@@ -63,21 +67,20 @@ export const HomePage = () => {
       trigger: '.workcard_box',
       start: 'top center',
       end: 'top 100px',
-      onEnter: ()=> console.log('enter'),
     })
     
     gsap.fromTo(work, {
-      x: "random(-200, 200)",
-      y: "random(-200, 200)",
+      x: "random(-600, 600)",
+      y: "random(-600, 600)",
       opacity: 0
     },
       {
         duration: 1,
-        stagger: 0.05,
+        stagger: 0.1,
         x: 0,
         y:0,
         opacity: 1,
-        ease:'none',
+        ease:'sine.inOut',
         scrollTrigger: workTrigger
       })
     
@@ -96,10 +99,11 @@ export const HomePage = () => {
       ease: 'back',
       toggleActions: 'play restart none reverse',
       scrollTrigger: {
-        trigger: '.catchphrase',
-        start: 'top center',
+        trigger: '.skills_box',
+        start: 'bottom 200px',
         endTrigger: '#services',
-        end: 'bottom center',        
+        end: 'bottom center',    
+        markers:true        
       },
       
     });
@@ -113,7 +117,7 @@ export const HomePage = () => {
   
   
   return (
-    <Box w={'100%'} display={'flex'} flexDir={'column'}>
+    <Box w={'100%'} display={'flex'} flexDir={'column'}> 
       {/* HERO section */}
       <Box className='hero' w={'100%'} h={'100vh'} padding={{ base: '0rem 1.5rem', xl:'1.75rem 10rem', lg: '1rem 6rem', md: '0rem 3rem'}} borderBottom={'1px solid #d8d8d8'}>
         <Box className='hero_text' zIndex={'1'} >
@@ -132,7 +136,7 @@ export const HomePage = () => {
       </Box>
       
       {/* WORK */}
-      <Box id='work' className='workcard_box' padding={{ base: '4rem 1.5rem',md: '4rem 3rem',  lg: '6rem 4rem', xl:'14rem 10rem 5rem 10rem'}}>
+      <Box id='work' className='workcard_box' padding={{ base: '4rem 1.5rem',md: '4rem 3rem',  lg: '6rem 4rem', xl:'14rem 10rem 5rem 10rem'}} ref={containerRef}>
         <Heading>Work</Heading>
         <Grid h={{base:'auto', xl: '1100px'}} 
           templateRows={{base:'repeat(6, 1fr)',md:'repeat(3, 1fr)', lg:'repeat(5, 1fr)'}}
