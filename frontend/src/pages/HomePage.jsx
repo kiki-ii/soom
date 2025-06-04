@@ -1,5 +1,5 @@
 
-import { Box, Grid, GridItem, Heading, HStack, Image, Text } from '@chakra-ui/react';
+import { Box, Center, Grid, GridItem, Heading, HStack, Image, Text } from '@chakra-ui/react';
 import {WorkCard} from '../components/WorkCard';
 import {ServiceCard} from '../components/ServiceCard';
 import {useDragScroll} from '../hooks/useDragScroll.js';
@@ -7,13 +7,14 @@ import product from '../store/portfolio.js';
 
 import { useWorkStore } from '../store/work';
 import { useServiceStore } from '../store/service';
-import { useEffect, useLayoutEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { WorkPopup } from '../components/WorkPopup.jsx';
 import { Bg } from '../components/Bg.jsx';
 
 import { gsap } from "gsap";    
 import { SplitText } from "gsap/SplitText";
-
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(SplitText, ScrollTrigger);
 
 export const HomePage = () => {
 
@@ -22,6 +23,7 @@ export const HomePage = () => {
   const products = product;
   
   gsap.registerPlugin(SplitText);
+  gsap.registerPlugin(ScrollTrigger);
   
   useEffect(() => {
     fetchWorks();
@@ -44,37 +46,68 @@ export const HomePage = () => {
   return (
     <div>
       {text.split('').map((char, i) => (
-        <span key={i} className="hero_title " style={{ animationDelay: `${i * 0.1}s` }}>
+        <span key={i} className="hero_title " style={{ animationDelay: `${i * 0.3}s` }}>
           {char}
         </span>
       ))}
     </div>
   );
-  }
-  
-  
+  }  
 
 
-  useLayoutEffect(() => {
-    gsap.registerPlugin(SplitText);
-
-    let split = SplitText.create('.about', {
+  useLayoutEffect(() => {   
+    
+    let work = gsap.utils.toArray('.workcard');        
+    
+    const workTrigger = ScrollTrigger.create({
+      trigger: '.workcard_box',
+      start: 'top center',
+      end: 'top 100px',
+      onEnter: ()=> console.log('enter'),
+    })
+    
+    gsap.fromTo(work, {
+      x: "random(-200, 200)",
+      y: "random(-200, 200)",
+      opacity: 0
+    },
+      {
+        duration: 1,
+        stagger: 0.05,
+        x: 0,
+        y:0,
+        opacity: 1,
+        ease:'none',
+        scrollTrigger: workTrigger
+      })
+    
+    
+    const split = SplitText.create('.catchphrase', {
       type: 'chars,words,lines',
       charsClass: 'chars',
-      // wordsClass: "",
-      // wordDelimiter: String.fromCharCode(8205)
     });
 
     gsap.from(split.chars, {
-      x: -500,
+      y: "random(-200, 200)" ,
+      x: "random(-200, 200)",
       opacity: 0,
       autoAlpha: 0,
-      stagger: 0.05,
-      duration: 1,
+      stagger: 0.1,
       ease: 'back',
+      toggleActions: 'play restart none reverse',
+      scrollTrigger: {
+        trigger: '.catchphrase',
+        start: 'top center',
+        endTrigger: '#services',
+        end: 'bottom center',        
+      },
+      
     });
 
-    return () => split.revert(); // 메모리 누수 방지
+    return () => {
+      split.revert(); // 메모리 누수 방지
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill()); // ScrollTrigger 정리
+    }
   }, []); 
   
   
@@ -88,18 +121,13 @@ export const HomePage = () => {
             Lee soo min
           </Text>
           {/* <h1  className='title'>UI/UX &<br /> Web Publishing</h1> */}
-          <SplitTitle text="UI/UX &" />
-          <SplitTitle text="Web Publishing" />
+          <Box>
           
-          {/* <Text className='title' textWrap={'wrap'} fontSize={{base: '6xl', md:'8xl', lg:'8xl', xl:'8.5rem'}}>
-            UI<span>/</span>UX <span>&</span>
-            <br />
-            Web Publishing
-          </Text> */}
+          <SplitTitle text="UI/UX &" />
+          <SplitTitle className="delay" text="Web Publishing" />
+          </Box>
         </Box>
-        {/* <Box position={'absolute'} left={'0'} top={'0'} w={'100%'} h={'100%'} zIndex={'0'}>
-          <iframe src="https://my.spline.design/circleblur-OzXPv7GgLooPtjhFqr6Surve-65u/" frameborder="0" width="100%" height="100%"></iframe>
-        </Box> */}
+        
         {/* <Bg /> */}
       </Box>
       
@@ -111,24 +139,22 @@ export const HomePage = () => {
           templateColumns={{base:'repeat(1, 1fr)' ,md:'repeat(2, 1fr)' ,lg:'repeat(3, 1fr)'}}
           gap={6}
           className='grid_work'
-        >
-                    
+        >                    
           {products.map(product => (
             <GridItem className='workcard' key={product.id}  >
               <WorkPopup key={product.id}  work={product} />
             
           </GridItem>
-          ))}  
-          
+          ))}            
           
         </Grid>
       </Box>
 
       {/* SKILLS */}
-      <Box id='skills' className='skills_box' padding={{ base: '4rem 1.5rem',md: '4rem 3rem',  lg: '8rem 4rem', xl:'10rem 10rem 6rem 10rem'}}>
+      <Box id='skills' className='skills_box' padding={{ base: '4rem 1.5rem',md: '4rem 3rem',  lg: '8rem 4rem', xl:'4rem 10rem'}} marginY={{base:'', xl:'6rem'}}>
         <HStack position='relative' display={{base:'block', lg:'flex'}}>
           <Heading>Skills</Heading>
-          <Text position={{base:'relative', lg:'absolute'}} marginTop={{base:'1rem', lg:'0'}} className='skills_box_p'>The skills, tools and technologies I use : </Text>
+          <Text  marginTop={{base:'1rem', lg:'0'}} marginLeft={{base: '0', lg:'24px'}} className='skills_box_p'>The skills, tools and technologies I use : </Text>
         </HStack>
         
         <Grid
@@ -137,7 +163,7 @@ export const HomePage = () => {
           templateColumns={{base: 'repeat(2, 1fr)',lg:'repeat(3, 1fr)', xl:'repeat(6, 1fr)'}}
           gap={6} fontSize={{base:'1rem',md:'1.125rem', lg:'1.25rem'}}
         >
-          <HStack>
+          <HStack gap={'4'}>
             <Image src={getImageUrl('icon_html.svg')} alt='html' />
             <Text>HTML 5</Text>
           </HStack>
@@ -191,6 +217,8 @@ export const HomePage = () => {
           </HStack>
         </Grid>
       </Box>
+      
+      <Box className='catchphrase_box'><Text className='catchphrase'>Less, <span>but</span> Better</Text></Box>
 
       {/* SERVICES */}
       <Box id='services' className='services_box' padding={{ base: '4rem 1.5rem',md: '4rem 3rem',  lg: '6rem 4rem', xl:'10rem 10rem'}}>

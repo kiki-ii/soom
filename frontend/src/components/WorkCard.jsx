@@ -22,7 +22,7 @@ export const WorkCard = ({ work, setOpen }) => {
   
   return (
     
-    <Card.Root  border={'none'} key={work._id} h='100%' >      
+    <Card.Root  key={work._id} h='100%' >      
       <Box className='work_img' style={workImg} onClick={handleOpen}></Box>      
       <Card.Body gap="2" className='workcard_body' >
         <Card.Title>{work.title}</Card.Title>
