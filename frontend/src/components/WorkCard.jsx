@@ -24,11 +24,11 @@ export const WorkCard = ({ work, setOpen }) => {
     
     <Card.Root  key={work._id} h='100%' >      
       <Box className='work_img' style={workImg} onClick={handleOpen}></Box>      
-      <Card.Body gap="2" className='workcard_body' >
+      <Card.Body gap="" className='workcard_body' >
         <Card.Title>{work.title}</Card.Title>
         <HStack mt="2" >
           {work.tag.map(t => (
-          <Badge size="lg" key={t}>{t}</Badge>
+          <Badge size={{sm:'sm', md:"lg"}} key={t}>{t}</Badge>
           ))}
         </HStack>
       </Card.Body>

@@ -15,7 +15,7 @@
 
 body {  position: relative; font-family: "Noto Sans KR", sans-serif; scroll-behavior: smooth; }
 
-h2 {font-family: var(--font-mont); letter-spacing: -0.11rem; font-size: 6rem; font-weight: 700; line-height: 100%;} /* font-size: 3.375rem; */
+h2 {font-family: var(--font-mont); letter-spacing: -0.11rem;  font-weight: 700; line-height: 100%;} /* font-size: 3.375rem; */
 
 .gnb {  position: absolute;  left: 0;  top: 0;  z-index: 99;  width: 100%;  padding:var(--box-padding); }
 .gnb .logo { background: url(./assets/images/logo_soom.svg) 0 0 no-repeat ; background-size: contain;}
@@ -25,6 +25,7 @@ h2 {font-family: var(--font-mont); letter-spacing: -0.11rem; font-size: 6rem; fo
   transition: bottom 0.5s var(--bounce); background-color: rgba(255,255,255,0.7); backdrop-filter: blur(4px);}
 .gnb .show {bottom: 3% !important;}
 
+.section { background-color: #fff; width: 100%; height: 100vh;}
 
 
 /*=== HERO ===*/
@@ -47,7 +48,7 @@ h2 {font-family: var(--font-mont); letter-spacing: -0.11rem; font-size: 6rem; fo
 	font-weight: 700;
   line-height: 100%;
 	letter-spacing:-0.2rem;
-	animation: weight 4s ease-in; /* infinite */
+	animation: weight 2.5s ease-in; /* infinite */
   animation-delay: calc(var(--char-index) * 150ms);
 	}
   /* .hero_text .hero_title.delay {animation-delay: calc(var(--char-index) * 1000ms) !important; border: 2px solid red;} */
@@ -69,10 +70,14 @@ h2 {font-family: var(--font-mont); letter-spacing: -0.11rem; font-size: 6rem; fo
 
 
 /*=== WORK ===*/
-
-.workcard_box {  margin-top: var(--box-margin-top);}
+/* .inner-scroll {width: 100%; height: 100vh; box-sizing: border-box; overflow-y: auto; -webkit-overflow-scrolling: touch;will-change: transform} */
+.workcard_box { box-sizing: border-box; }
 .workcard_box h2 { margin-bottom: var(--title-mb);}
 .workcard_box .grid_work {align-items: stretch; }
+.inner-scroll { padding-bottom: 30px; box-sizing: border-box; -webkit-overflow-scrolling: touch; will-change: transform}
+.inner-scroll::-webkit-scrollbar {  display: none;}
+.content {min-height:100vh ;}
+/* .workcard_box {  margin-top: var(--box-margin-top);} */
 
 .workcard {height: 100%; min-height: 400px; transition: all .2s ease-in; overflow: hidden; will-change: transform;}
 .workcard:hover, .workcard:focus {z-index: 1;  /* scale: 1.06;*/ border-radius: 36px;
@@ -94,26 +99,27 @@ h2 {font-family: var(--font-mont); letter-spacing: -0.11rem; font-size: 6rem; fo
 /* .workcard img {width: 100%; height: 100%; object-fit: contain; } */
 .workcard .work_img {width: 100%; height: 100%; position: relative; }
 .workcard .work_img::after { content: '';position: absolute; left: 0; top: 0;  width: 100%; height: 100%; background-color: rgba(0,0,0,0.1); transition: opacity 0.2s; }
-.workcard h3 {font-size: 1.5rem; }
+.workcard h3 {font-size: 1.125rem; }
 .workcard:hover .work_img::after { opacity: 0;}
-.workcard .workcard_body {width: 100%; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px);  position: absolute; bottom: 0; transition: 0.2s ease-in-out}
+.workcard .workcard_body {width: 100%; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px);  position: absolute; bottom: 0; transition: 0.2s ease-in-out; padding: 0.75rem 1rem;}
 .workcard:hover .workcard_body {bottom: -200px; }
 
 
+
 /*=== SKILLS ===*/
-.skills_box { position: relative; margin-top: var(--box-margin-top); z-index: 0;}
-.skills_box::after {content: ''; width: 100%; height: 120%; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: url(../src/assets/images/bg_skills.png) center no-repeat ; background-size: cover; z-index: -1; filter: blur(60px);}
+.skills_box { position: relative; /*margin-top: var(--box-margin-top);*/ z-index: 0;  display: flex; justify-content: center; flex-direction: column;}
+.skills_box::after {content: ''; width: 100%; height: 100%; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: url(../src/assets/images/bg_skills.png) center no-repeat ; background-size: cover; z-index: -1; filter: blur(60px);}
 .skills_box_p { font-size: 1.25rem;}
 .skills {width: 100%; margin: 0 auto; margin-top: 5rem;}
 .skills > div {gap: 12px; }
-.skills p {font-size: 1.25rem; }
+.skills p {font-size: 1rem; }
 
 /*=== CATCHPHRASE ===*/
-.catchphrase_box { width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; font-family: var(--font-mont);  font-weight: 800; font-size: 6rem; letter-spacing: -0.2rem; }
-.catchphrase {position: relative; }
+.catchphrase_box {  display: flex; align-items: center; justify-content: center; font-family: var(--font-mont);  font-weight: 800; letter-spacing: -0.2rem; padding: 0 2rem;}
+.catchphrase {position: relative; font-size: 3rem; }
 /* .catchphrase > div > div > div{background: linear-gradient(131deg,rgba(98, 46, 120, 1) 0%, rgba(0, 0, 0, 1) 100%); background-clip: text; -webkit-background-clip: text; color: transparent;} */
 
-.catchphrase::after {content: ''; position: absolute; top: -10px; right: -110px; width: 120px; height: 120px; background: url(../src/assets/images/icon_quotation2.svg) top right no-repeat ; background-size: contain; opacity: .1; }
+.catchphrase::after {content: ''; position: absolute; top: -10px; right: -110px; width: 120px; height: 120px; background: url(../src/assets/images/icon_quotation2.svg) top right no-repeat ; background-size: contain; opacity: .1;display: none; }
 
 /*=== SERVICES ===*/
 .services_box { position: relative; padding-right: 0 !important; margin-top: var(--box-margin-top);  z-index: 0; }
@@ -158,23 +164,32 @@ gap: 1.25rem; cursor: grab; touch-action: none; width: 100%; user-select: none; 
 
 /*=== MEDIAQUERY ===*/
 @media (min-width: 375px) {
+  .box_title { font-size: 2.5rem;}
   .hero_text {gap: 1.75rem;}
   .hero_text .name::after { width: 10%; bottom: -0.825rem;}
   .hero_text .hero_title { font-size: 15dvw; text-wrap:wrap; }
 
+  .catchphrase {font-size: 3rem; text-wrap: wrap;}
   .catchphrase::after {display: none;}
 
   .about_box h2 {font-size: 4rem;}
 }
 
 @media (min-width: 768px) {
+  .box_title { font-size: 4rem;} 
   .hero_text .name::after { width: 52px;}
   .hero_text .hero_title { font-size:6rem; text-wrap:wrap; }
+  .workcard .workcard_body {padding: 1rem  1.25rem;}
+  .workcard h3 {font-size: 1.25rem; }
+  .skills p {font-size: 1.125rem; }
+  .catchphrase {font-size: 4rem;}
 }
 
 @media (min-width: 992px) {
   .hero_text .hero_title { font-size:7rem; text-wrap:wrap; }
-
+  .inner-scroll { padding-bottom: 100px;}
+  .workcard h3 {font-size: 1.5rem; }
+  .skills p {font-size: 1.25rem; }
   .catchphrase::after {display: block;}
 
   .about_box h2 {font-size:6rem;}
@@ -197,7 +212,11 @@ gap: 1.25rem; cursor: grab; touch-action: none; width: 100%; user-select: none; 
 }
 
 @media (min-width: 1200px) {
+
+  .box_title { font-size: 6rem;}
   .hero_text .hero_title { font-size:8rem; text-wrap:wrap; }
+
+  .catchphrase {font-size: 6rem;}
   .about_box h2 {font-size: 8rem;}
 }
 
