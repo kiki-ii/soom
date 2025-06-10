@@ -61,30 +61,32 @@ export const HomePage = () => {
 
   useLayoutEffect(() => {   
     
-    let work = gsap.utils.toArray('.workcard');        
     
-    const workTrigger = ScrollTrigger.create({
-      trigger: '.workcard_box',
-      start: 'top center',
-      end: 'top 100px',
-    })
+    // NOTE: WORK CARD
+    // let work = gsap.utils.toArray('.workcard');        
     
-    gsap.fromTo(work, {
-      x: "random(-600, 600)",
-      y: "random(-600, 600)",
-      opacity: 0
-    },
-      {
-        duration: 1,
-        stagger: 0.1,
-        x: 0,
-        y:0,
-        opacity: 1,
-        ease:'sine.inOut',
-        scrollTrigger: workTrigger
-      })
+    // const workTrigger = ScrollTrigger.create({
+    //   trigger: '.workcard_box',
+    //   start: 'top center',
+    //   end: 'top 100px',
+    // })
     
+    // gsap.fromTo(work, {
+    //   x: "random(-600, 600)",
+    //   y: "random(-600, 600)",
+    //   opacity: 0
+    // },
+    //   {
+    //     duration: 1,
+    //     stagger: 0.1,
+    //     x: 0,
+    //     y:0,
+    //     opacity: 1,
+    //     ease:'sine.inOut',
+    //     scrollTrigger: workTrigger
+    //   })
     
+     // NOTE: CATCHPHRASE
     const split = SplitText.create('.catchphrase', {
       type: 'chars,words,lines',
       charsClass: 'chars',
@@ -92,18 +94,18 @@ export const HomePage = () => {
 
     gsap.from(split.chars, {
       y: "random(-200, 200)" ,
-      x: "random(-200, 200)",
+      // x: "random(-200, 200)",
       opacity: 0,
       autoAlpha: 0,
-      stagger: 0.1,
-      ease: 'back',
-      toggleActions: 'play restart none reverse',
+      stagger: 0.3,
+      ease: 'sine.inOut',
+      // toggleActions: 'play restart none reverse',
       scrollTrigger: {
         trigger: '.skills_box',
         start: 'bottom 200px',
         endTrigger: '#services',
         end: 'bottom center',    
-        markers:true        
+        markers:false        
       },
       
     });
@@ -135,9 +137,9 @@ export const HomePage = () => {
         {/* <Bg /> */}
       </Box>
       
-      {/* WORK */}
+      {/* PORTFOLIO */}
       <Box id='work' className='workcard_box' padding={{ base: '4rem 1.5rem',md: '4rem 3rem',  lg: '6rem 4rem', xl:'14rem 10rem 5rem 10rem'}} ref={containerRef}>
-        <Heading>Work</Heading>
+        <Heading className='box_title'>Portfolio</Heading>
         <Grid h={{base:'auto', xl: '1100px'}} 
           templateRows={{base:'repeat(6, 1fr)',md:'repeat(3, 1fr)', lg:'repeat(5, 1fr)'}}
           templateColumns={{base:'repeat(1, 1fr)' ,md:'repeat(2, 1fr)' ,lg:'repeat(3, 1fr)'}}
@@ -155,9 +157,9 @@ export const HomePage = () => {
       </Box>
 
       {/* SKILLS */}
-      <Box id='skills' className='skills_box' padding={{ base: '4rem 1.5rem',md: '4rem 3rem',  lg: '8rem 4rem', xl:'4rem 10rem'}} marginY={{base:'', xl:'6rem'}}>
+      <Box id='skills' className='skills_box' padding={{ base: '4rem 1.5rem',md: '4rem 3rem',  lg: '8rem 4rem', xl:'4rem 10rem'}} >
         <HStack position='relative' display={{base:'block', lg:'flex'}}>
-          <Heading>Skills</Heading>
+          <Heading className='box_title'>Skills</Heading>
           <Text  marginTop={{base:'1rem', lg:'0'}} marginLeft={{base: '0', lg:'24px'}} className='skills_box_p'>The skills, tools and technologies I use : </Text>
         </HStack>
         
@@ -226,7 +228,7 @@ export const HomePage = () => {
 
       {/* SERVICES */}
       <Box id='services' className='services_box' padding={{ base: '4rem 1.5rem',md: '4rem 3rem',  lg: '6rem 4rem', xl:'10rem 10rem'}}>
-        <Heading>Services</Heading>
+        <Heading className='box_title'>Services</Heading>
         <Box className='service' ref={ref}>
           {services.map(service => (
             <ServiceCard key={service._id} service={service} />
