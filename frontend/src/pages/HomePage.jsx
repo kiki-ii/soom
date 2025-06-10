@@ -60,49 +60,6 @@ export const HomePage = () => {
 
   useLayoutEffect(() => {   
     
-    if (!containerRef.current) return; // ref가 없으면 종료
-    
-    const ctx = gsap.context(() => {
-      // 모든 섹션을 뷰포트 높이로 설정
-      gsap.set(sections.current, { height: "100vh", overflow: "hidden" });
-
-      // 각 섹션에 ScrollTrigger 적용
-      sections.current.forEach((section) => {
-        if (!section) return;
-        
-        // 내부 컨테이너 생성 (스크롤 가능 영역)
-        const innerContent = section.querySelector(".inner-scroll");
-        if (innerContent) {
-          gsap.set(innerContent, {
-            overflowY: "auto", // 내용이 넘치면 스크롤
-            maxHeight: "100vh" // 최대 높이 제한
-          });
-        }
-        
-        ScrollTrigger.create({
-          trigger: section,
-          start: "top top",
-          end: "bottom top",
-          pin: true,
-          pinSpacing: false,
-          snap: 1,
-          scrub:0.5,
-          markers:false,
-          // onEnter: () => {
-          //   // 섹션 진입 시 애니메이션 (옵션)
-          //   gsap.from(section.querySelector(".section"), { 
-          //     opacity: 0, 
-          //     y: 50, 
-          //     duration: 0.8 
-          //   });
-          // }
-          
-        });
-      });
-    }, containerRef);
-    
-    
-    
     
     // NOTE: WORK CARD
     // let work = gsap.utils.toArray('.workcard');        
@@ -115,12 +72,12 @@ export const HomePage = () => {
     
     // gsap.fromTo(work, {
     //   x: "random(-600, 600)",
-    //   // y: "random(-600, 600)",
+    //   y: "random(-600, 600)",
     //   opacity: 0
     // },
     //   {
     //     duration: 1,
-    //     stagger: 0.3,
+    //     stagger: 0.1,
     //     x: 0,
     //     y:0,
     //     opacity: 1,
@@ -128,7 +85,7 @@ export const HomePage = () => {
     //     scrollTrigger: workTrigger
     //   })
     
-    // NOTE: CATCHPHRASE
+     // NOTE: CATCHPHRASE
     const split = SplitText.create('.catchphrase', {
       type: 'chars,words,lines',
       charsClass: 'chars',
@@ -147,13 +104,13 @@ export const HomePage = () => {
         start: 'top center',
         endTrigger: '#services',
         end: 'bottom center',    
-        
+        markers:false        
       },
       
     });
 
     return () => {
-      ctx.revert(); 
+      
       split.revert(); // 메모리 누수 방지
       ScrollTrigger.getAll().forEach(trigger => trigger.kill()); // ScrollTrigger 정리
     }
@@ -184,34 +141,27 @@ export const HomePage = () => {
         {/* <Bg /> */}
       </Box>
       
-      {/* WORK */}
-      <Box id='work' ref={addToRefs} className='section  workcard_box' paddingX={{base:'1.5rem', md:'3rem' , lg:'4rem', xl:'10rem'}} paddingY={{base: '1.5rem', md:'2rem', lg:'4rem', xl:'4rem'}} >
-        {/* padding={{ base: '4rem 1.5rem', md: '4rem 3rem', lg: '6rem 4rem', xl: '5rem 10rem 5rem 10rem' }} */}
-        <Box className='inner-scroll'>
-          <Box className='content' paddingBottom={'10rem'}>
-          <Heading className='box_title'>Work</Heading>
-            <Grid h={{base:'auto', xl: '1100px'}} 
-              templateRows={{base:'repeat(6, 1fr)',md:'repeat(3, 1fr)', lg:'repeat(5, 1fr)'}}
-              templateColumns={{base:'repeat(1, 1fr)' ,md:'repeat(2, 1fr)' ,lg:'repeat(3, 1fr)'}}
-              gap={6}
-              className='grid_work' 
-            >                    
-              {products.map(product => (
-                <GridItem className='workcard' key={product.id}  >
-                  <WorkPopup key={product.id}  work={product} />
-                
-              </GridItem>
-              ))}            
-              
-            </Grid>
+      {/* PORTFOLIO */}
+      <Box id='work' className='workcard_box' padding={{ base: '4rem 1.5rem',md: '4rem 3rem',  lg: '6rem 4rem', xl:'14rem 10rem 5rem 10rem'}} ref={containerRef}>
+        <Heading className='box_title'>Portfolio</Heading>
+        <Grid h={{base:'auto', xl: '1100px'}} 
+          templateRows={{base:'repeat(6, 1fr)',md:'repeat(3, 1fr)', lg:'repeat(5, 1fr)'}}
+          templateColumns={{base:'repeat(1, 1fr)' ,md:'repeat(2, 1fr)' ,lg:'repeat(3, 1fr)'}}
+          gap={6}
+          className='grid_work'
+        >                    
+          {products.map(product => (
+            <GridItem className='workcard' key={product.id}  >
+              <WorkPopup key={product.id}  work={product} />
+            
+          </GridItem>
+          ))}            
           
-          </Box>
-        
-        </Box>
+        </Grid>
       </Box>
 
       {/* SKILLS */}
-      <Box id='skills' ref={addToRefs} className='section skills_box' padding={{ base: '4rem 1.5rem',md: '4rem 3rem',  lg: '8rem 4rem', xl:'4rem 10rem'}} >
+      <Box id='skills' className='skills_box' padding={{ base: '4rem 1.5rem',md: '4rem 3rem',  lg: '8rem 4rem', xl:'4rem 10rem'}} >
         <HStack position='relative' display={{base:'block', lg:'flex'}}>
           <Heading className='box_title'>Skills</Heading>
           <Text  marginTop={{base:'1rem', lg:'0'}} marginLeft={{base: '0', lg:'24px'}} className='skills_box_p'>The skills, tools and technologies I use : </Text>
@@ -281,7 +231,7 @@ export const HomePage = () => {
       <Box ref={addToRefs}  className='section catchphrase_box'><Text className='catchphrase'>Less, <span>but</span> Better</Text></Box>
 
       {/* SERVICES */}
-      <Box id='services' ref={addToRefs}  className='section services_box' padding={{ base: '4rem 1.5rem',md: '4rem 3rem',  lg: '6rem 4rem', xl:'10rem 10rem'}}>
+      <Box id='services' className='services_box' padding={{ base: '4rem 1.5rem',md: '4rem 3rem',  lg: '6rem 4rem', xl:'10rem 10rem'}}>
         <Heading className='box_title'>Services</Heading>
         <Box className='service' ref={ref}>
           {services.map(service => (

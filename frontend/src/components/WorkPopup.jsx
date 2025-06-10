@@ -27,7 +27,7 @@ export const WorkPopup = ({work }) => {
             {/* <Dialog.Header>
               <Dialog.Title>With Outside Scroll</Dialog.Title>
             </Dialog.Header> */}
-            <Dialog.CloseTrigger top="-12" bgColor={'#fff'} asChild>
+            <Dialog.CloseTrigger  bgColor={'#ffffff'} asChild>
               <CloseButton size='lg' />
             </Dialog.CloseTrigger>
             <Dialog.Body>

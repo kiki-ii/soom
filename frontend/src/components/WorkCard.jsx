@@ -28,7 +28,7 @@ export const WorkCard = ({ work, setOpen }) => {
         <Card.Title>{work.title}</Card.Title>
         <HStack mt="2" >
           {work.tag.map(t => (
-          <Badge size={{sm:'sm', md:"lg"}} key={t}>{t}</Badge>
+          <Badge size={{base:'sm', md:"lg"}} key={t}>{t}</Badge>
           ))}
         </HStack>
       </Card.Body>
