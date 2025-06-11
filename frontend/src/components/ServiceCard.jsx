@@ -12,7 +12,7 @@ export const ServiceCard = ( {service}) => {
   return (
     <Card.Root className="servicecard">
       <Image src={getImageUrl(service.iconimg)} alt='' />
-      <Card.Body gap={4}>
+      <Card.Body gap={{base:'2', lg:'4'}}>
         <Card.Title>{service.title}</Card.Title>
         <Card.Description>{service.descript}</Card.Description>
       </Card.Body>

@@ -1,4 +1,4 @@
-import { Badge, Box, Card, HStack, Image } from '@chakra-ui/react'
+import { Badge, Box, Card, HStack,Text, Image } from '@chakra-ui/react'
 
 
 export const WorkCard = ({ work, setOpen }) => {
@@ -25,12 +25,14 @@ export const WorkCard = ({ work, setOpen }) => {
     <Card.Root  key={work._id} h='100%' >      
       <Box className='work_img' style={workImg} onClick={handleOpen}></Box>      
       <Card.Body gap="" className='workcard_body' >
-        <Card.Title>{work.title}</Card.Title>
-        <HStack mt="2" >
+        <HStack mb="3" wrap={'wrap'} >
           {work.tag.map(t => (
-          <Badge size={{base:'sm', md:"lg"}} key={t}>{t}</Badge>
+            // <Badge size={{base:'sm', md:"lg"}} key={t}>{t}</Badge>
+            <Box className='badge' size={{base:'sm', md:"lg"}} key={t}>{t}</Box>
+            
           ))}
         </HStack>
+        <Card.Title>{work.title}</Card.Title>
       </Card.Body>
     </Card.Root>
   )

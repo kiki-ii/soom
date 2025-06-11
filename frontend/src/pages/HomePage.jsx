@@ -1,8 +1,7 @@
 
-import { Box, Center, Grid, GridItem, Heading, HStack, Image, Text } from '@chakra-ui/react';
-import {WorkCard} from '../components/WorkCard';
+import { Accordion, Box, Center, Grid, GridItem, Heading, HStack, Image, Span, Text, VStack } from '@chakra-ui/react';
 import {ServiceCard} from '../components/ServiceCard';
-import {useDragScroll} from '../hooks/useDragScroll.js';
+// import {useDragScroll} from '../hooks/useDragScroll.js';
 import product from '../store/portfolio.js';
 
 import { useWorkStore } from '../store/work';
@@ -14,6 +13,8 @@ import { Bg } from '../components/Bg.jsx';
 import { gsap } from "gsap";    
 import { SplitText } from "gsap/SplitText";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import faq from '../store/faq.js';
+import { Tags } from '../components/Tags.jsx';
 
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
@@ -34,11 +35,11 @@ export const HomePage = () => {
   }, [fetchWorks, fetchServices]);
   
   
-  const [ref] = useDragScroll();
-  if (!ref) {
-    const services_box = document.querySelector('.services_box');
-    services_box.style.overflowY = 'auto';
-  }
+  // const [ref] = useDragScroll();
+  // if (!ref) {
+  //   const services_box = document.querySelector('.services_box');
+  //   services_box.style.overflowY = 'auto';
+  // }
 
   function getImageUrl(name) {
     // note that this does not include files in subdirectories
@@ -58,63 +59,63 @@ export const HomePage = () => {
   }  
   
 
-  useLayoutEffect(() => {   
+  // useLayoutEffect(() => {   
     
     
-    // NOTE: WORK CARD
-    // let work = gsap.utils.toArray('.workcard');        
+  //   // NOTE: WORK CARD
+  //   // let work = gsap.utils.toArray('.workcard');        
     
-    // const workTrigger = ScrollTrigger.create({
-    //   trigger: '.workcard_box',
-    //   start: 'top center',
-    //   end: 'top 100px',
-    // })
+  //   // const workTrigger = ScrollTrigger.create({
+  //   //   trigger: '.workcard_box',
+  //   //   start: 'top center',
+  //   //   end: 'top 100px',
+  //   // })
     
-    // gsap.fromTo(work, {
-    //   x: "random(-600, 600)",
-    //   y: "random(-600, 600)",
-    //   opacity: 0
-    // },
-    //   {
-    //     duration: 1,
-    //     stagger: 0.1,
-    //     x: 0,
-    //     y:0,
-    //     opacity: 1,
-    //     ease:'sine.inOut',
-    //     scrollTrigger: workTrigger
-    //   })
+  //   // gsap.fromTo(work, {
+  //   //   x: "random(-600, 600)",
+  //   //   y: "random(-600, 600)",
+  //   //   opacity: 0
+  //   // },
+  //   //   {
+  //   //     duration: 1,
+  //   //     stagger: 0.1,
+  //   //     x: 0,
+  //   //     y:0,
+  //   //     opacity: 1,
+  //   //     ease:'sine.inOut',
+  //   //     scrollTrigger: workTrigger
+  //   //   })
     
-     // NOTE: CATCHPHRASE
-    const split = SplitText.create('.catchphrase', {
-      type: 'chars,words,lines',
-      charsClass: 'chars',
-    });
+  //   // NOTE: CATCHPHRASE
+  //    const split = SplitText.create('.catchphrase', {
+  //      type: 'chars,words,lines',
+  //      charsClass: 'chars',
+  //    });
 
-    gsap.from(split.chars, {
-      y: "random(-200, 200)" ,
-      // x: "random(-200, 200)",
-      opacity: 0,
-      autoAlpha: 0,
-      stagger: 0.3,
-      ease: 'sine.inOut',
-      // toggleActions: 'play restart none reverse',
-      scrollTrigger: {
-        trigger: '.catchphrase_box', // .skills_box
-        start: 'top center',
-        endTrigger: '#services',
-        end: 'bottom center',    
-        markers:false        
-      },
+  //   gsap.from(split.chars, {
+  //     y: "random(-200, 200)" ,
+  //     // x: "random(-200, 200)",
+  //     opacity: 0,
+  //     autoAlpha: 0,
+  //     stagger: 0.3,
+  //     ease: 'sine.inOut',
+  //     // toggleActions: 'play restart none reverse',
+  //     scrollTrigger: {
+  //       trigger: '.catchphrase_box', // .skills_box
+  //       start: 'top center',
+  //       endTrigger: '#services',
+  //       end: 'bottom center',    
+  //       markers:false        
+  //     },
       
-    });
+  //   });
 
-    return () => {
+  //   return () => {
       
-      split.revert(); // 메모리 누수 방지
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill()); // ScrollTrigger 정리
-    }
-  }, []); 
+  //     split.revert(); // 메모리 누수 방지
+  //     ScrollTrigger.getAll().forEach(trigger => trigger.kill()); // ScrollTrigger 정리
+  //   }
+  // }, []); 
   
   const addToRefs = (el) => {
     if (el && !sections.current.includes(el)) {
@@ -123,7 +124,7 @@ export const HomePage = () => {
   };
   
   return (
-    <Box  w={'100%'} display={'flex'} flexDir={'column'} ref={containerRef} overflow={'hidden'}> 
+    <Box className='container'  w={'100%'} display={'flex'} flexDir={'column'} ref={containerRef} overflow={'hidden'}> 
       {/* HERO section */}
       <Box ref={addToRefs} className='section hero' w={'100%'} h={'100vh'} padding={{ base: '0rem 1.5rem', xl:'1.75rem 10rem', lg: '1rem 6rem', md: '0rem 3rem'}} borderBottom={'1px solid #d8d8d8'}>
         <Box className='hero_text' zIndex={'1'} >
@@ -133,7 +134,7 @@ export const HomePage = () => {
           {/* <h1  className='title'>UI/UX &<br /> Web Publishing</h1> */}
           <Box>
           
-          <SplitTitle text="UI/UX &" />
+          <SplitTitle text="UI/UX Design &" />
           <SplitTitle className="delay" text="Web Publishing" />
           </Box>
         </Box>
@@ -142,18 +143,21 @@ export const HomePage = () => {
       </Box>
       
       {/* PORTFOLIO */}
-      <Box id='work' className='workcard_box' padding={{ base: '4rem 1.5rem',md: '4rem 3rem',  lg: '6rem 4rem', xl:'14rem 10rem 5rem 10rem'}} ref={containerRef}>
-        <Heading className='box_title'>Portfolio</Heading>
+      <Box id='work' className='workcard_box' padding={{ base: '4rem 1.5rem', md: '4rem 3rem', lg: '6rem 4rem', xl: '14rem 10rem 5rem 10rem' }} ref={containerRef}>
+        <VStack className='section_title' alignItems={'start'}>
+          <Text>PORTFOLIO</Text>
+          <Heading >Design in Action</Heading>
+        </VStack>
         <Grid h={{base:'auto', xl: '1100px'}} 
-          templateRows={{base:'repeat(6, 1fr)',md:'repeat(3, 1fr)', lg:'repeat(5, 1fr)'}}
-          templateColumns={{base:'repeat(1, 1fr)' ,md:'repeat(2, 1fr)' ,lg:'repeat(3, 1fr)'}}
+          templateRows={{base:'repeat(4, 1fr)',md:'repeat(2, 1fr)' , }}
+          templateColumns={{base:'repeat(1, 1fr)' ,md:'repeat(2, 1fr)', lg:'repeat(12, 1fr)' }}
           gap={6}
           className='grid_work'
-        >                    
-          {products.map(product => (
-            <GridItem className='workcard' key={product.id}  >
-              <WorkPopup key={product.id}  work={product} />
-            
+        > 
+        
+          {products.slice(0, 4).map((product, index) => (
+            <GridItem className='workcard' key={index}  >
+              <WorkPopup key={index}  work={product} />            
           </GridItem>
           ))}            
           
@@ -161,90 +165,111 @@ export const HomePage = () => {
       </Box>
 
       {/* SKILLS */}
-      <Box id='skills' className='skills_box' padding={{ base: '4rem 1.5rem',md: '4rem 3rem',  lg: '8rem 4rem', xl:'4rem 10rem'}} >
-        <HStack position='relative' display={{base:'block', lg:'flex'}}>
-          <Heading className='box_title'>Skills</Heading>
-          <Text  marginTop={{base:'1rem', lg:'0'}} marginLeft={{base: '0', lg:'24px'}} className='skills_box_p'>The skills, tools and technologies I use : </Text>
-        </HStack>
+      <Box id='skills' className='skills_box' padding={{ base: '4rem 1.5rem', md: '4rem 3rem', lg: '8rem 4rem', xl: '4rem 10rem' }} >
+        <VStack className='section_title' alignItems={'start'}>
+          <Text>SKILLS</Text>
+          <Heading >What I Work With</Heading>
+        </VStack>
         
-        <Grid
-          className='skills' paddingX={{base:'4%', lg:'10%', xl:'8%'}}
-          templateRows={{base: 'repeat(6, 1fr)',lg:'repeat(5, 1fr)', xl:'repeat(3, 1fr)' }}
-          templateColumns={{base: 'repeat(2, 1fr)',lg:'repeat(3, 1fr)', xl:'repeat(6, 1fr)'}}
-          gap={6} fontSize={{base:'1rem',md:'1.125rem', lg:'1.25rem'}}
-        >
-          <HStack gap={'4'}>
-            <Image src={getImageUrl('icon_html.svg')} alt='html' />
-            <Text>HTML 5</Text>
-          </HStack>
-          <HStack>
-            <Image src={getImageUrl('icon_css.svg')} alt='css' />
-            <Text>CSS</Text>
-          </HStack>
-          <HStack>
-            <Image src={getImageUrl('icon_sass.svg')} alt='sass' />
-            <Text>Sass</Text>
-          </HStack>
-          <HStack>
-            <Image src={getImageUrl('icon_js.svg')} alt='javascript' />
-            <Text>Javascript</Text>
-          </HStack>
-          <HStack>
-            <Image src={getImageUrl('icon_bootstrap.svg')} alt='bootstrap' />
-            <Text>Bootstrap</Text>
-          </HStack>
-          <HStack>
-            <Image src={getImageUrl('icon_react.svg')} alt='react' />
-            <Text>React</Text>
-          </HStack>
-          <HStack>
-            <Image src={getImageUrl('icon_figma.svg')} alt='figma' />
-            <Text>Figma</Text>
-          </HStack>
-          <HStack>
-            <Image src={getImageUrl('icon_xd.svg')} alt='Adobe XD' />
-            <Text>Adobe XD</Text>
-          </HStack>
-          <HStack>
-            <Image src={getImageUrl('icon_vscode.svg')} alt='VSCode' />
-            <Text>VSCode</Text>
-          </HStack>
-          <HStack>
-            <Image src={getImageUrl('icon_ps.svg')} alt='photoshop' />
-            <Text>Photoshop</Text>
-          </HStack>
-          <HStack>
-            <Image src={getImageUrl('icon_ai.svg')} alt='illustrator' />
-            <Text>Illustrator</Text>
-          </HStack>
-          <HStack>
-            <Image src={getImageUrl('icon_notion.svg')} alt='notion' />
-            <Text>Notion</Text>
-          </HStack>
-          <HStack>
-            <Image src={getImageUrl('icon_github.svg')} alt='github' />
-            <Text>Github</Text>
-          </HStack>
+        <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }} gap={6}>
+          <Box  className='skills_cat_box'>
+            <h4>Development</h4>
+            <Grid templateColumns={'repeat(2, 1fr)'} gap={'3'}>
+              <Box className='skill_item' >
+                <Image src={getImageUrl('icon_html.svg')} alt='html' />
+                <Text>HTML 5</Text>
+              </Box>
+              <Box className='skill_item' >
+                <Image src={getImageUrl('icon_css.svg')} alt='css' />
+                <Text>CSS</Text>
+              </Box>
+              <Box className='skill_item' >
+                <Image src={getImageUrl('icon_js.svg')} alt='javascript' />
+                <Text>Javascript</Text>
+              </Box>
+              <Box className='skill_item' >
+                <Image src={getImageUrl('icon_bootstrap.svg')} alt='bootstrap' />
+                <Text>Bootstrap</Text>
+              </Box>
+              <Box className='skill_item' >
+                <Image src={getImageUrl('icon_react.svg')} alt='react' />
+                <Text>React</Text>
+              </Box>
+              
+            </Grid>
+          </Box>
+          <Box className='skills_cat_box'>
+            <h4>Design</h4>
+            <Grid templateColumns={'repeat(2, 1fr)'} gap={'3'}>
+              <Box className='skill_item' >
+                <Image src={getImageUrl('icon_figma.svg')} alt='figma' />
+                <Text>Figma</Text>
+              </Box>
+              <Box className='skill_item' >
+                <Image src={getImageUrl('icon_xd.svg')} alt='Adobe XD' />
+                <Text>Adobe XD</Text>
+              </Box>
+              <Box className='skill_item' >
+                <Image src={getImageUrl('icon_ps.svg')} alt='Photoshop' />
+                <Text>Photoshop</Text>
+              </Box>
+              <Box className='skill_item' >
+                <Image src={getImageUrl('icon_ai.svg')} alt='illustrator' />
+                <Text>Illustrator</Text>
+              </Box>
+              
+            </Grid>
+          </Box>
+          <Box className='skills_cat_box'>
+            <h4>Tools</h4>
+            <Grid templateColumns={'repeat(2, 1fr)'} gap={'3'}>
+              <Box className='skill_item' >
+                <Image src={getImageUrl('icon_vscode.svg')} alt='vscode' />
+                <Text>VSCode</Text>
+              </Box>
+              <Box className='skill_item' >
+                <Image src={getImageUrl('icon_notion.svg')} alt='notoin' />
+                <Text>Notion</Text>
+              </Box>
+              <Box className='skill_item' >
+                <Image src={getImageUrl('icon_github.svg')} alt='github' />
+                <Text>Github</Text>
+              </Box>
+            </Grid>
+          </Box>
+
         </Grid>
       </Box>
       
-      <Box ref={addToRefs}  className='section catchphrase_box'><Text className='catchphrase'>Less, <span>but</span> Better</Text></Box>
+      {/* <Box ref={addToRefs}  className='section catchphrase_box'><Text className='catchphrase'>Less, <span>but</span> Better</Text></Box> */}
 
       {/* SERVICES */}
       <Box id='services' className='services_box' padding={{ base: '4rem 1.5rem',md: '4rem 3rem',  lg: '6rem 4rem', xl:'10rem 10rem'}}>
-        <Heading className='box_title'>Services</Heading>
-        <Box className='service' ref={ref}>
+        <VStack className='section_title' alignItems={'start'}>
+          <Text>SERVICES</Text>
+          <Heading >What I Offer</Heading>
+        </VStack>
+        <Grid className='service' templateColumns={{base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', lg:'repeat(3, 1fr)', xl:'repeat(4, 1fr)'}} gridAutoFlow={'dense'} >
           {services.map(service => (
             <ServiceCard key={service._id} service={service} />
           ))}
-        </Box>
-      
+        </Grid>      
       </Box>
+      
+      
+      {/* TAGS */}
+      <Box id='tags' className='tags_box' paddingX={{ base: '4rem 1.5rem',md: '4rem 3rem',  lg: '6rem 4rem', xl:'10rem 16rem'}} display={{base:'none', xl:'block'}}>
+        <Tags />
+      </Box>
+      
 
       {/* ABOUT */}
-      <Box id='about' ref={addToRefs}  className='section about_box' padding={{ base: '4rem 1.5rem',md: '4rem 3rem',  lg: '6rem 4rem', xl:'10rem 10rem'}} display={{base: 'block', lg:'flex'}} borderTop={'1px solid #d8d8d8'}>
-        <Heading >About</Heading>
-        <Text width={{base:'auto', lg: '55%'}} paddingTop={{base:'2rem', lg:'0'}} fontSize={{base: '1.125rem', lg:'1.375rem'}} className='about'>
+      <Box id='about' ref={addToRefs} className='section about_box' padding={{ base: '4rem 1.5rem', md: '4rem 3rem', lg: '6rem 4rem', xl: '10rem 10rem' }} paddingBottom={'0 !important'} display={{ base: 'block', lg: 'flex' }} justifyContent={'space-between'}>        
+        <VStack className='section_title' alignItems={'start'}>
+          <Text>ABOUT ME</Text>
+          <Heading lineHeight={'125% !important'} >Less Design, <br />More Meaning</Heading>
+        </VStack>
+        <Text width={{base:'auto', lg: '55%'}} paddingTop={{base:'2rem', lg:'0'}} fontSize={{base: '1.125rem', lg:'1.375rem'}} className='about_p'>
           안녕하세요. 디자인과 퍼블리싱에 대한 10년 이상의 경력을 가진 UI/UX
           디자이너 이수민입니다.
           <br />
@@ -263,6 +288,24 @@ export const HomePage = () => {
           있습니다.
         </Text>
       </Box>
+      
+      <Box className='section faq_box' padding={{ base: '4rem 1.5rem',md: '4rem 3rem',  lg: '6rem 4rem', xl:'10rem 10rem'}} display={{base: 'block', lg:'flex'}}  >
+        <Accordion.Root collapsible defaultValue={["1"]}>
+          {faq.map((f, id) => (
+            <Accordion.Item key={id} value={f.id}>
+              <Accordion.ItemTrigger className='faq_trigger'>
+                <Text flex="1" >{f.title}</Text>
+                <Accordion.ItemIndicator />
+              </Accordion.ItemTrigger>
+              <Accordion.ItemContent>
+                <Accordion.ItemBody className='faq_cont'>{f.description}</Accordion.ItemBody>
+              </Accordion.ItemContent>
+            </Accordion.Item>
+          ))}
+        </Accordion.Root>
+      </Box>
+      
+      
       
     </Box>
   );

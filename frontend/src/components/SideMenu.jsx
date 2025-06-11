@@ -27,12 +27,12 @@ export const SideMenu = () => {
               <Drawer.CloseTrigger asChild>
                 <CloseButton className='closebtn' size='2xl' />
               </Drawer.CloseTrigger>
-              <Drawer.Body>
+              <Drawer.Body padding={'0'}>
                 <VStack className='sidemenu'>
-                  <a href='#work' onClick={sideclose}>Work</a>
+                  <a href='#work' onClick={sideclose}>Portfolio</a>
                   <a href='#skills' onClick={sideclose}>Skills</a>
                   <a href='#services' onClick={sideclose}>Services</a>
-                  <a href='#about' onClick={sideclose}>About</a>
+                  <a href='#about' onClick={sideclose}>About me</a>
                 </VStack>
               </Drawer.Body>
             </Drawer.Content>
