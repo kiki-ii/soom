@@ -4,12 +4,24 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css");
 
 :root {
+  --title-mb-sm: 1rem; 
+  --title-mb-md: 1.125rem; 
+  --title-mb-lg: 1.25rem; 
+  --title-mb-xl: 1.5rem; 
+  --section_mt-sm: 5rem;  
+  --section_mt-md: 6rem;  
+  --section_mt-lg: 7rem;  
+  --section_mt-xl: 12rem;  
+  --section_px-sm: 5rem;  
+  --section_px-md: 6rem;  
+  --section_px-lg: 7rem;  
+  --section_px-xl: 10rem;  
   --primary:rgba(68, 54, 178, 100);
   --primary_rgb:68, 54, 178;
   --box-margin-top: 0rem;
   --box-padding: 1.75rem 10rem;
   --font-mont : "Montserrat", sans-serif;
-  --title-mb : 2.125rem;
+  /* --title-mb : 2.125rem; */
   --bounce : cubic-bezier(.62,-0.35,.41,1.29);
   --word-index: 0;
   --body-color : #F7F5ED;
@@ -41,21 +53,20 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
 .gnb .show {bottom: 3% !important;}
 
 /* .section { background-color: #fff; width: 100%; height: 100vh;} */
+.section {margin-top: var(--section_mt-sm); }
 .section_title {align-items: start; font-family: var(--font-mont); color: var(--primary);}
-.section_title h2 {font-family: var(--font-mont);font-size: 2.5rem; letter-spacing: -0.15rem; font-weight: 700; line-height: 120%; margin-bottom: var(--title-mb);} 
+.section_title h2 {font-family: var(--font-mont);font-size: 2.5rem; letter-spacing: -0.15rem; font-weight: 700; line-height: 120%; margin-bottom: var(--title-mb-sm);} 
 .section_title p {font-weight: 600; font-size: 1.125rem; position: relative;margin-left: 5px; }
 .section_title p::after {content: ''; width: 2px; height: 70%; background-color: var(--primary); position: absolute; right: -20px; top: 50%; transform: translateY(-50%); }
 
 /*=== HERO ===*/
-.hero { position: relative; display: flex; padding: var(--box-padding); background: url(../src/assets/images/bg_main_01.png) no-repeat; background-size: 200%; background-position-x: left; color: #4536B2;}
+.hero { position: relative; display: flex; padding: var(--box-padding); background: url(../src/assets/images/bg_main_01.png) no-repeat; background-size: 200%; background-position-x: left; color: #4536B2; height: 100vh !important;}
 
+.line-container {margin-bottom: 0.5em; /* 줄 간격 조정 */}
 .hero_text {display: flex; flex-direction: column;  align-self: flex-end; text-align: left; margin-bottom: 1.5rem;  font-family: var(--font-mont); letter-spacing: -0.075rem; gap: 1.75rem;}
 .hero_text .name { position: relative; font-weight: 500; text-transform: uppercase ; }
 .hero_text .name::after {content: '';position: absolute; left: 0; bottom: -1.5rem;  width: 52px; height: 2px; background-color: #1e1e1e; }
-/* [data-splitting] .char {
-  display: inline-block;
-  opacity: 1 !important; 
-} */
+
   .hero_text .title { font-size: 8vw; font-weight: 100; }
   /*.chars {font-weight: 900;}  새로 덮어쓰기 됨 */
   /* .hero_text .hero_title { font-size: 8vw; font-weight: 900; } */
@@ -66,12 +77,10 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
 	font-weight: 700;
   line-height: 100%;
 	letter-spacing:-0.25rem;
-	animation: weight 2.5s ease-in; /* infinite */
-  animation-delay: calc(var(--char-index) * 150ms);
+	animation: weight 4s ease-in ; /* infinite */
+  /* animation-delay: calc(var(--char-index) * 150ms); */
 	}
-  /* .hero_text .hero_title.delay {animation-delay: calc(var(--char-index) * 1000ms) !important; border: 2px solid red;} */
-/*.hero_text .title {font-size: 10vw; font-weight: 100; line-height: 100%; letter-spacing: -0.15rem; animation: weight 4s infinite; animation-delay: calc(var(--char-index) * 150ms);}
- .hero_text .title span {font-weight: 300; } */
+  
 
 @keyframes weight {
 	from {
@@ -104,7 +113,8 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
               0 16px 32px rgba(0,0,0,0.07), 
               0 32px 64px rgba(0,0,0,0.07);
 }
-
+.workcard .icon_popup {position: absolute; top: 20px; right: 20px; display: none; color: #fff; }
+.workcard:hover .icon_popup {display: block;}
 .workcard .work_img {width: 100%; height: 100%; position: relative; }
 .workcard .work_img::after { content: '';position: absolute; left: 0; top: 0;  width: 100%; height: 100%; background: #000000; background: linear-gradient(46deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%); opacity: 0; transition: opacity 0.2s; }
 .workcard h3 {font-size: 1.5rem; font-weight: 400; }
@@ -145,6 +155,7 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
 
 
 /*=== TAGS ===*/
+.tags_box {width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; text-align: center;  }
 .tags_item {display: inline-block; font-family: var(--font-mont); font-weight: 600; letter-spacing: -2px; margin: 0 6px; padding:0 3px; }
 
 
@@ -215,8 +226,12 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
 
 
 /*=== MEDIAQUERY ===*/
-@media (min-width: 374.9px) {
+@media (min-width: 375px) {
+  .section {margin-top: var(--section_mt-sm);}
   .box_title { font-size: 2.5rem;}
+
+  
+  .section_title h2 {margin-bottom: var(--title-mb-sm);}
   .hero {background-size: 160%; background-position-x: left;}
   .hero_text {gap: 1.75rem;}
   .hero_text .name::after { width: 10%; bottom: -0.825rem;}
@@ -228,11 +243,11 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
 
 }
 
-@media (min-width: 767.9px) {
-  .container::after {right: -150px; top: 50%; width:500px; height:500px;}
-  .container::before {left: -300px; top: 70%; width: 800px; height:800px;}
-
-  .section_title h2 {font-size: 3rem;}
+@media (min-width: 768px) {
+  .section {margin-top: var(--section_mt-md);}
+  .container::after {right: -150px; top: 2400px; width:500px; height:500px;}
+  .container::before {left: -300px; top: 3600px; width: 800px; height:800px;}
+  .section_title h2 {font-size: 3rem; margin-bottom: var(--title-mb-md);}
   .section_title p {font-size: 1.25rem;}
 
   .hero {background-size: 110%; background-position-x: left;}
@@ -252,11 +267,12 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
   .footer .txt_big {font-size: calc(1rem + 10dvw); }
 }
 
-@media (min-width: 991.9px) {
+@media (min-width: 992px) {
+  .section {margin-top: var(--section_mt-lg);}
   .container::after {right: -150px; top: 2500px; width:630px; height:630px;}
   .container::before {left: -400px; top: 4000px; width: 900px; height:900px;}
 
-  .section_title h2 {font-size: 4.25rem;}
+  .section_title h2 {font-size: 4.25rem;  margin-bottom: var(--title-mb-lg);}
   .section_title p {font-size: 1.875rem;}
   .hero {background-size: 80%; background-position-x: right;}
   .hero_text .hero_title { font-size:6.5rem; text-wrap:wrap; }
@@ -264,39 +280,15 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
 
   .catchphrase::after {display: block;}
   .about_box .about_p {font-size: 1.125rem;}
-
   
   .grid_work .workcard:nth-child(1) {grid-column: 1 / 8;  grid-row: 1 ;}
   .grid_work .workcard:nth-child(2) {grid-column: 8 / 13;  grid-row: 1;}
   .grid_work .workcard:nth-child(3) {grid-column: 1 / 6;  grid-row: 2;}
   .grid_work .workcard:nth-child(4) {grid-column: 6 / 13;  grid-row: 2;}
-  /* .grid_work .workcard:nth-child(5) {grid-column: 2;  grid-row: 4 / 6;}
-  .grid_work .workcard:nth-child(6) {grid-column: 3;  grid-row: 3 / 6;} */
 
-  /* .grid_work .workcard:nth-child(1) {grid-column: 1;  grid-row: 1 / 3;}
-  .grid_work .workcard:nth-child(2) {grid-column: 2;  grid-row: 1 / 4;}
-  .grid_work .workcard:nth-child(3) {grid-column: 3;  grid-row: 1 / 3;}
-  .grid_work .workcard:nth-child(4) {grid-column: 1;  grid-row: 3 / 6;}
-  .grid_work .workcard:nth-child(5) {grid-column: 2;  grid-row: 4 / 6;}
-  .grid_work .workcard:nth-child(6) {grid-column: 3;  grid-row: 3 / 6;}
-  .grid_work .workcard:nth-child(2), 
-  .grid_work .workcard:nth-child(5) {margin-top: -48px;} */
-  /* .grid_work .workcard:nth-child(1) { grid-row: span 2}
-  .grid_work .workcard:nth-child(2) { grid-row: span 3}
-  .grid_work .workcard:nth-child(3) { grid-row: span 2}
-  .grid_work .workcard:nth-child(4) { grid-row: span 3}
-  .grid_work .workcard:nth-child(5) { grid-row: span 2}
-  .grid_work .workcard:nth-child(6) { grid-row: span 3} */
-
-/* 
-  .services_box .service .servicecard:nth-child(1) {grid-column: span 2; }  
-  .services_box .service .servicecard:nth-child(5) {grid-column: span 2;}
-  .services_box .service .servicecard:nth-child(1) img,  
-  .services_box .service .servicecard:nth-child(5) img {width: 76px; height: 76px;}  
-  .services_box .service .servicecard:nth-child(1) p,
-  .services_box .service .servicecard:nth-child(5) p {padding:0 20%;}   */
   .services_box .service .servicecard h3 { font-size: 1.75rem;}  
-  
+   .service .servicecard:nth-child(1) {grid-column: 1 / 3; grid-row: 1;}
+  .service .servicecard:nth-child(2) {grid-column: 2 / 4; grid-row: 2;}
 
   .faq_box .faq_trigger {font-size: 1.5rem; }
   .faq_box .faq_cont {font-size: 1.125rem; padding: 0 48px;}
@@ -306,17 +298,20 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
   .footer .circle_box {right: 80px; top: 120px;}
 }
 
-@media (min-width: 1199.9px) {
-  .container::after {right: -300px; top: 2600px; width: 737px; height:702px;}
+@media (min-width: 1200px) {
+  .section {margin-top: var(--section_mt-xl);}
+  .container::after {right: -300px; top: 2400px; width: 737px; height:702px;}
   .container::before {left: -300px; top: 4200px; width: 1000px; height:1000px;}
 
+  .section_title h2 { margin-bottom: var(--title-mb-xl);}
   .box_title { font-size: 6rem;}
   .hero_text .hero_title { font-size:8rem; text-wrap:wrap; }
   .catchphrase {font-size: 6rem;}
   .servicecard p {display: inline; text-align: center;}
   .services_box .service .servicecard {padding: 52px 20px 20px 20px ;}
   .services_box .service .servicecard img {margin-bottom: 16px;}
-
+  .service .servicecard:nth-child(1) {grid-column: 1 / 3; grid-row: 1;}
+  .service .servicecard:nth-child(2) {grid-column: 3 / 5; grid-row: 2;}
 
 
   .skills_box .skills_cat_box { padding: 44px 48px; }
@@ -328,13 +323,16 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
   .footer .circle_box {right: 80px; top: 240px;}
 }
 
-@media (min-width: 1399.9px) {
+@media (min-width: 1400px) {
   .container::after {right: -300px; top: 2650px; width: 737px; height:702px;}
-  .container::before {left: -300px; top: 3900px; width: 1000px; height:1000px;}
+  .container::before {left: -300px; top: 3700px; width: 1000px; height:1000px;}
 
   .hero_text .hero_title { font-size:8.5rem; text-wrap:wrap; }
 
   .servicecard {min-height: 330px;}
+
+  /* .service .servicecard:nth-child(1) {grid-column: 1 / 3; grid-row: 1;}
+  .service .servicecard:nth-child(2) {grid-column: 3 / 5; grid-row: 2;} */
 
   .skills_box .skills_cat_box { padding: 44px 48px; }
   .skills_box .skills_cat_box .skill_item {flex-direction: row;}

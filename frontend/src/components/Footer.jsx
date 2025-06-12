@@ -13,7 +13,7 @@ export const Footer = () => {
     },[])
   
   return (
-    <footer h={'580px'} className='footer'>
+    <footer h={'580px'} className='section footer'>
       <div className="circle_box">
         <div className='circle'>
         {/* <div classNam e="innersize"></div> */}

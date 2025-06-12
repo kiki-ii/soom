@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react';
 import {TagCloud} from 'react-tagcloud';
 
 
@@ -15,7 +16,7 @@ const customRenderer = (tag, size, color) => (
     style={{
       animation: 'blinker 4s linear infinite',
       animationDelay: `${Math.random() * 2.5}s`,
-      fontSize: `${size / 2.5}rem`,
+      fontSize: `${size / 2.0}rem`,
       transform: `rotate(${rotate}deg)`,
       color: color,
     }}
@@ -28,11 +29,11 @@ export const Tags = () => {
   
   
   return (
-    <div style={{ width: '100%', height: 'auto', textAlign:'center', }}>
+    <Box paddingX={{ lg:'0px', xl: '100px'}} paddingY={{base:'10rem', xl: '0rem', }}>
       {/* minSize={4} maxSize={11} */}
-        <TagCloud minSize={4} maxSize={11} tags={data} colorOptions={options} randomSeed={42}  renderer={customRenderer} />
+        <TagCloud minSize={2} maxSize={10} tags={data} colorOptions={options} randomSeed={42}  renderer={customRenderer} />
       
-    </div>
+    </Box>
   )
 }
 
@@ -40,7 +41,7 @@ export const Tags = () => {
 const data = [
   {value: 'HTML5',            count: 45  },
   {value: 'Figma',            count: 100  },
-  {value: 'Photoshop',        count: 25  },
+  {value: 'Photoshop',        count: 56  },
   {value: 'Cross Browsing',   count: 46  },
   {value: 'Vite',             count: 30  },
   {value: 'UX',               count: 80  },
@@ -69,8 +70,8 @@ const data = [
   {value: 'Adobe XD',         count: 85  },
   {value: 'npm',              count: 40  },
   {value: 'Color',            count: 35  },
-  {value: 'Web standards',    count: 75  },
-  {value: 'Micro Interactions',count: 65,  },
+  {value: 'Web standards',    count: 55  },
+  {value: 'Micro Interactions',count: 45,  },
   {value: 'Bootstrap',        count: 55,  },
   {value: 'Chakra UI',        count: 60,  },
 ]
