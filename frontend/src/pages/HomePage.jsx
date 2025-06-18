@@ -1,5 +1,5 @@
 
-import { Accordion, Box, Center, Grid, GridItem, Heading, HStack, Image, Span, Text, VStack } from '@chakra-ui/react';
+import { Accordion, Box, Button, Grid, GridItem, Heading, HStack, Image, Span, Text, VStack } from '@chakra-ui/react';
 import {ServiceCard} from '../components/ServiceCard';
 // import {useDragScroll} from '../hooks/useDragScroll.js';
 import product from '../store/portfolio.js';
@@ -15,6 +15,7 @@ import { SplitText } from "gsap/SplitText";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import faq from '../store/faq.js';
 import { Tags } from '../components/Tags.jsx';
+import { Footer } from '../components/Footer.jsx';
 
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
@@ -67,39 +68,39 @@ export const HomePage = () => {
   );
   }  
   
-  useLayoutEffect(() => {
+  // useLayoutEffect(() => {
     
-    const sections = document.querySelectorAll(".section");
-    sections.forEach(section => {
-      gsap.fromTo(
-        section,
-        {
-          opacity: 0,
-          y: 200,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          // delay:0.5,
-          stagger: 0.2,
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 60%', // 화면 상단에서 80% 위치에서 시작
-            end: 'bottom 40%', // 섹션 하단에서 20% 위치에서 끝
-            toggleActions: 'play none none none', // 스크롤 동작 설정
+  //   const sections = document.querySelectorAll(".section");
+  //   sections.forEach(section => {
+  //     gsap.fromTo(
+  //       section,
+  //       {
+  //         opacity: 0,
+  //         y: 200,
+  //       },
+  //       {
+  //         opacity: 1,
+  //         y: 0,
+  //         duration: 0.3,
+  //         // delay:0.5,
+  //         stagger: 0.2,
+  //         scrollTrigger: {
+  //           trigger: section,
+  //           start: 'top 60%', // 화면 상단에서 80% 위치에서 시작
+  //           end: 'bottom 40%', // 섹션 하단에서 20% 위치에서 끝
+  //           toggleActions: 'play none none none', // 스크롤 동작 설정
             
-            markers: false,
-          },
-        }
-      );
-    });
+  //           markers: false,
+  //         },
+  //       }
+  //     );
+  //   });
 
-    return () => {
+  //   return () => {
     
-    ScrollTrigger.getAll().forEach(t => t.kill());
-  };
-  }, [])
+  //   ScrollTrigger.getAll().forEach(t => t.kill());
+  // };
+  // }, [])
 
   // useLayoutEffect(() => {   
     
@@ -202,6 +203,9 @@ export const HomePage = () => {
           </GridItem>
           ))}     
         </Grid>
+        <Box display='flex' justifyContent='center' marginTop={{base:'5', md:'8',lg:'10' }}>
+          <Button asChild className='btn_all' size={{base:'lg', md:'2xl' }} rounded='full' variant='ghost' ><a href='/work'>See all</a></Button>
+        </Box>
       </Box>
 
       {/* SKILLS */}
@@ -349,7 +353,7 @@ export const HomePage = () => {
       </Box>
       
       
-      
+      <Footer />
       
     </Box>
   );

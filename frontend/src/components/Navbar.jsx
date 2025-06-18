@@ -1,14 +1,18 @@
-import { Box, Button, HStack, Icon, Image } from '@chakra-ui/react'
+import { Box,  HStack,} from '@chakra-ui/react'
 import { useEffect, useState } from 'react';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import { TfiLock, TfiUnlock, TfiPlus, TfiArrowUp } from 'react-icons/tfi';
-import { IoMdMenu } from "react-icons/io";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { SideMenu } from './SideMenu';
 
 export const Navbar = () => {
   const [showBtn, setShowBtn] = useState(false);
   // const topButton = document.querySelector('.btn_top');
+  const location = useLocation();
+  const currentPath = location.pathname;
+  
+  const isHome = currentPath === '/';
+  // const isWork = currentPath === '/work';
   
   useEffect(() => {
     const showBtn = () => {
@@ -34,11 +38,23 @@ export const Navbar = () => {
         
         </Link>
         
-        <HStack className='nav_item' gap='16' display={{base:'none', lg:'flex'}}>
-          <AnchorLink href='#work'>Work</AnchorLink>
-          <AnchorLink href='#skills'>Skills</AnchorLink>
-          <AnchorLink href='#services'>Services</AnchorLink>
-          <AnchorLink href='#about'>About</AnchorLink>
+        <HStack className='nav_item' gap='16' display={{ base: 'none', lg: 'flex' }}>
+          {isHome ?
+            <>
+              <AnchorLink href='#work'>Work</AnchorLink>
+              <AnchorLink href='#skills'>Skills</AnchorLink>
+              <AnchorLink href='#services'>Services</AnchorLink>
+              <AnchorLink href='#about'>About</AnchorLink>
+            </>
+            :
+            <>
+              <Link to='/' >Work</Link>
+              <Link to='/' >Skills</Link>
+              <Link to='/' >Services</Link>
+              <Link to='/' >About</Link>
+            </>
+          }
+
           
           {/* <Icon  size="lg" >
             <TfiLock />
