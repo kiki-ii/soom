@@ -2,7 +2,9 @@ import { Box,  HStack,} from '@chakra-ui/react'
 import { useEffect, useState } from 'react';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import { TfiLock, TfiUnlock, TfiPlus, TfiArrowUp } from 'react-icons/tfi';
-import { Link, useLocation } from 'react-router-dom';
+import {  useLocation } from 'react-router-dom';
+
+import { HashLink as Link } from 'react-router-hash-link';
 import { SideMenu } from './SideMenu';
 
 export const Navbar = () => {
@@ -12,7 +14,6 @@ export const Navbar = () => {
   const currentPath = location.pathname;
   
   const isHome = currentPath === '/';
-  // const isWork = currentPath === '/work';
   
   useEffect(() => {
     const showBtn = () => {
@@ -39,19 +40,24 @@ export const Navbar = () => {
         </Link>
         
         <HStack className='nav_item' gap='16' display={{ base: 'none', lg: 'flex' }}>
+          {/* <Link to='/work' >Portfolio</Link>
+          <Link to='/#skills' >Skills</Link>
+          <Link to='/#services' >Services</Link>
+          <Link to='/#about' >About</Link> */}
           {isHome ?
             <>
-              <AnchorLink href='#work'>Work</AnchorLink>
+              <Link to='/work' >Portfolio</Link>
               <AnchorLink href='#skills'>Skills</AnchorLink>
               <AnchorLink href='#services'>Services</AnchorLink>
               <AnchorLink href='#about'>About</AnchorLink>
             </>
             :
             <>
-              <Link to='/' >Work</Link>
-              <Link to='/' >Skills</Link>
-              <Link to='/' >Services</Link>
-              <Link to='/' >About</Link>
+              <Link to='/' >Home</Link>
+              <Link to='/work' >Portfolio</Link>
+              <Link to='/#skills' >Skills</Link>
+              <Link to='/#services' >Services</Link>
+              <Link to='/#about' >About</Link>
             </>
           }
 

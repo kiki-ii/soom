@@ -6,7 +6,7 @@ import product from '../store/portfolio.js';
 
 import { useWorkStore } from '../store/work';
 import { useServiceStore } from '../store/service';
-import { useEffect,  useLayoutEffect,  useRef } from 'react';
+import { useEffect,  useRef } from 'react';
 import { WorkPopup } from '../components/WorkPopup.jsx';
 import { Bg } from '../components/Bg.jsx';
 
@@ -23,7 +23,7 @@ gsap.registerPlugin(SplitText, ScrollTrigger);
 export const HomePage = () => {
 
   const {fetchServices, services } = useServiceStore();
-  const { fetchWorks, works } = useWorkStore();
+  const { fetchWorks } = useWorkStore();
   const products = product;
   
   // const workRef = useRef();
@@ -31,6 +31,7 @@ export const HomePage = () => {
   const sections = useRef([]);
   
   const paddingX = { base: '1.5rem', md: ' 3rem', lg: '4rem', xl: '10rem' };
+  const marginL = { base: '-1.5rem', md: ' -3rem', lg: '-4rem', xl: '-10rem' };
 
   
   useEffect(() => {
@@ -38,13 +39,7 @@ export const HomePage = () => {
     fetchServices();    
     
   }, [fetchWorks, fetchServices ]);
-  
-  
-  // const [ref] = useDragScroll();
-  // if (!ref) {
-  //   const services_box = document.querySelector('.services_box');
-  //   services_box.style.overflowY = 'auto';
-  // }
+    
 
   function getImageUrl(name) {
     // note that this does not include files in subdirectories
@@ -67,6 +62,20 @@ export const HomePage = () => {
     </div>
   );
   }  
+  
+  function Faq({ text }) {
+    const lines = text.split('\n');
+    return (
+      <>
+        {
+          lines.map((line, lineIndex) => (
+            <p key={lineIndex} >{line}
+            </p>
+          ))
+        }
+      </>
+    )
+  }
   
   // useLayoutEffect(() => {
     
@@ -170,14 +179,14 @@ export const HomePage = () => {
     <Box className='container'  w={'100%'} display={'flex'} flexDir={'column'} ref={containerRef} overflow={'hidden'}> 
       {/* HERO section */}
       <Box ref={addToRefs} className='hero' w={'100%'} h={'100vh'} padding={{ base: '0rem 1.5rem', xl:'1.75rem 10rem', lg: '1rem 6rem', md: '0rem 3rem'}} borderBottom={'1px solid #d8d8d8'}>
-        <Box className='hero_text' zIndex={'1'} >
+        <Box className='hero_text' zIndex={'1'} marginLeft={marginL}>
           <Text className='name' fontSize={{base:'xl', md:'2xl', lg:'3xl', xl:'3xl'}}>
             Lee soo min
           </Text>
           {/* <h1  className='title'>UI/UX &<br /> Web Publishing</h1> */}
           <Box>
           
-          <SplitTitle text={"UI/UX Design & <br />Web Development"}  />
+          <SplitTitle text={"UI/UX Design & <br />Web Publishing"}  />
           {/* <SplitTitle text="Web Publishing" /> */}
           </Box>
         </Box>
@@ -344,7 +353,9 @@ export const HomePage = () => {
                   <Accordion.ItemIndicator />
                 </Accordion.ItemTrigger>
                 <Accordion.ItemContent>
-                  <Accordion.ItemBody className='faq_cont'>{f.description}</Accordion.ItemBody>
+                  <Accordion.ItemBody className='faq_cont'>
+                    <Faq text={f.description} />
+                  </Accordion.ItemBody>
                 </Accordion.ItemContent>
               </Accordion.Item>
             ))}

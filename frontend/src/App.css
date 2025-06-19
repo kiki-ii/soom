@@ -24,7 +24,8 @@
   /* --title-mb : 2.125rem; */
   --bounce : cubic-bezier(.62,-0.35,.41,1.29);
   --word-index: 0;
-  --body-color : #F7F5ED;
+  /* --body-color : #F7F5ED; */
+  --body-color : #FFFBEB;
 
   --radius: 20vmin;
 	--frame-size: calc(var(--radius) / 3);
@@ -52,7 +53,7 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
   transition: bottom 0.5s var(--bounce); background-color: rgba(255,255,255,0.7); backdrop-filter: blur(4px);}
 .gnb .show {bottom: 3% !important;}
 
-/* .section { background-color: #fff; width: 100%; height: 100vh;} */
+
 .section {margin-top: var(--section_mt-sm); }
 .section_title {align-items: start; font-family: var(--font-mont); color: var(--primary);}
 .section_title h2 {font-family: var(--font-mont);font-size: 2.5rem; letter-spacing: -0.15rem; font-weight: 700; line-height: 120%; margin-bottom: var(--title-mb-sm);} 
@@ -60,16 +61,14 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
 .section_title p::after {content: ''; width: 2px; height: 70%; background-color: var(--primary); position: absolute; right: -20px; top: 50%; transform: translateY(-50%); }
 
 /*=== HERO ===*/
-.hero { position: relative; display: flex; padding: var(--box-padding); background: url(../src/assets/images/bg_main_01.png) no-repeat; background-size: 200%; background-position-x: left; color: #4536B2; height: 100vh !important;}
+.hero { position: relative; display: flex; padding: var(--box-padding); background: url(../src/assets/images/bg_main_01.png) no-repeat; background-size: 200%; background-position-x: left; color: #4536B2; height: 100vh !important; z-index: 1;}
 
 .line-container {margin-bottom: 0.5em; /* 줄 간격 조정 */}
 .hero_text {display: flex; flex-direction: column;  align-self: flex-end; text-align: left; margin-bottom: 1.5rem;  font-family: var(--font-mont); letter-spacing: -0.075rem; gap: 1.75rem;}
 .hero_text .name { position: relative; font-weight: 500; text-transform: uppercase ; }
 .hero_text .name::after {content: '';position: absolute; left: 0; bottom: -1.5rem;  width: 52px; height: 2px; background-color: #1e1e1e; }
 
-  .hero_text .title { font-size: 8vw; font-weight: 100; }
-  /*.chars {font-weight: 900;}  새로 덮어쓰기 됨 */
-  /* .hero_text .hero_title { font-size: 8vw; font-weight: 900; } */
+.hero_text .title { font-size: 8vw; font-weight: 100; }
 .hero_text .hero_title { 
   will-change: font-weight;
   font-size: 15dvw;
@@ -78,8 +77,9 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
   line-height: 100%;
 	letter-spacing:-0.25rem;
 	animation: weight 4s ease-in ; /* infinite */
-  /* animation-delay: calc(var(--char-index) * 150ms); */
-	}
+  animation-iteration-count: 3;
+}
+
   
 
 @keyframes weight {
@@ -144,7 +144,7 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
 /*=== SERVICES ===*/
 .services_box { position: relative; margin-top: var(--box-margin-top);  z-index: 0; }
 .service {  padding-bottom: 1rem; gap: 1.25rem; cursor: grab; touch-action: none; width: 100%; user-select: none;  }
-.servicecard  { background-color: rgba(255,255,255,0.6); padding: 36px 0 20px 0 ;  display: flex; align-items: center ; justify-content: center; box-sizing: border-box; width: 100%; height: 100%;  backdrop-filter: blur(16px);box-shadow: 0 4px 16px rgba(var(--primary_rgb),0.06);}
+.servicecard  { background-color: rgba(247,241,215,0.75); padding: 36px 0 20px 0 ;  display: flex; align-items: center ; justify-content: center; box-sizing: border-box; width: 100%; height: 100%;  backdrop-filter: blur(16px); border: none;} /*box-shadow: 0 4px 16px rgba(var(--primary_rgb),0.06); */
 .servicecard img {width: 60px;}
 .servicecard h3 { font-size: 1.125rem; text-align: center; color: var(--primary);}
 .servicecard p {font-size: 1rem; display: none; color: var(--primary);}
@@ -189,9 +189,16 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
 
 /*=== SIDEMENU ===*/
 .sidemenu_box {display: flex; align-items: center; justify-content: center;  }
-.sidemenu {width: 100%; height: 100%; display: flex;  align-items: center; justify-content: center; font-family: var(--font-mont); font-weight: 600; letter-spacing: -0.05rem; font-size: 3rem; line-height: 1.8; background-color: var(--body-color);}
-.btn_menu {width: 44px; height: 44px;}
+.sidemenu {width: 100%; height: 100%; display: flex;  align-items: center; justify-content: center; font-family: var(--font-mont); font-weight: 600; letter-spacing: -0.05rem; font-size: 3rem; line-height: 1.8; background-color: var(--body-color); color: var(--primary);}
+.sidemenu a {position: relative;}
+.sidemenu a::after {content: ''; position: absolute; left: 50%; bottom: 10%; width: 0%; height: 4px;   background-color: var(--primary); transform: translateX(-50%); transition: width 0.2s;}
+.sidemenu a:hover::after {width: 100%;}
+.btn_menu {width: 44px; height: 44px; color: var(--primary);}
+.btn_menu:hover {background-color: var(--primary); color: #fff;}
 .btn_menu svg {width: 100%; height: 100%;}
+.closebtn {color: var(--primary);}
+.closebtn svg {width: 100%; height: 100%;}
+.closebtn:hover {color: #fff; background-color: var(--primary);}
 
 
 
@@ -265,7 +272,7 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
 
   .hero {background-size: 110%; background-position-x: left;}
   .hero_text .name::after { width: 52px;}
-  .hero_text .hero_title { font-size:5.5rem; text-wrap:wrap; }
+  .hero_text .hero_title { font-size:5.5rem; }
 
   .workcard .workcard_body {padding: 2.25rem;}
   .workcard h3 {font-size: 1.5rem; }
@@ -289,7 +296,7 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
   .section_title h2 {font-size: 4.25rem;  margin-bottom: var(--title-mb-lg);}
   .section_title p {font-size: 1.875rem;}
   .hero {background-size: 80%; background-position-x: right;}
-  .hero_text .hero_title { font-size:6.5rem; text-wrap:wrap; }
+  .hero_text .hero_title { font-size:6.5rem;  }
   .workcard h3 {font-size: 1.75rem; }
 
   .catchphrase::after {display: block;}
@@ -320,7 +327,7 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
 
   .section_title h2 { margin-bottom: var(--title-mb-xl);}
   .box_title { font-size: 6rem;}
-  .hero_text .hero_title { font-size:8rem; text-wrap:wrap; }
+  .hero_text .hero_title { font-size:8rem; }
   .catchphrase {font-size: 6rem;}
   .servicecard p {display: inline; text-align: center;}
   .services_box .service .servicecard {padding: 52px 20px 20px 20px ;}
@@ -343,7 +350,7 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
   .container::after {right: -300px; top: 2700px; width: 737px; height:702px;}
   .container::before {left: -300px; top: 3900px; width: 1000px; height:1000px;}
 
-  .hero_text .hero_title { font-size:8.5rem; text-wrap:wrap; }
+  .hero_text .hero_title { font-size:9.5rem;  }
 
   .servicecard {min-height: 330px;}
 
@@ -366,6 +373,11 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
 
 }
 
+@media (min-width: 1920px) {
+  .hero_text .hero_title { font-size:10.25rem;  }  
+  .hero_text .name { font-size:2.75rem;  }  
+}
+
 @keyframes blinker {
   50% { opacity: 0.0; }
 }
@@ -375,5 +387,26 @@ body {  position: relative; font-family: "Pretendard", sans-serif; scroll-behavi
 /* ========================== */
 /*         WorkPage           */
 /* ========================== */
+.workpage.container {position: relative; z-index: 0; }
+.workpage.container::after {content: ''; position: absolute; right: -100px; top: 50px; background:url(../src/assets/images/bg_main_02.png) no-repeat; background-size: cover; z-index: -1; }
+.portfolio_box  { position: relative; margin-top: 200px;   z-index: 0; }
+.portfolio_title {margin-left: -50px;}
+.portfolio_title h2 {font-family: var(--font-mont);letter-spacing: -0.15rem; font-weight: 700; line-height: 100%; color: var(--primary);}
 
-.portfolio_box  { position: relative; margin-top: var(--box-margin-top);  z-index: 0; margin-top: 200px; }
+/*=== MEDIAQUERY ===*/
+@media (min-width: 375px) {
+
+}
+@media (min-width: 768px) {
+  .workpage.container::after {width: 300px; height: 300px;}
+}
+
+@media (min-width: 992px) {
+  .workpage.container::after {width: 400px; height: 400px;}
+}
+
+@media (min-width: 1200px) {}
+
+@media (min-width: 1400px) {
+  .workpage.container::after {width: 500px; height: 500px;}
+}

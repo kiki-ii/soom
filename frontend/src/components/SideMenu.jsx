@@ -1,10 +1,17 @@
-import { Box,  CloseButton,  Drawer, VStack, Portal, IconButton } from '@chakra-ui/react'
+import { HashLink as Link } from 'react-router-hash-link';
+import { useLocation } from 'react-router-dom';
+import AnchorLink from 'react-anchor-link-smooth-scroll';
+import { Box, CloseButton, Drawer, VStack, Portal, IconButton } from '@chakra-ui/react'
 import {  useState } from 'react';
 import { IoMdMenu } from 'react-icons/io';
 
 
 export const SideMenu = () => {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const currentPath = location.pathname;
+  
+  const isHome = currentPath === '/';
 
   const sideclose = e => {
     e.addEventListener('click', setOpen(false));
@@ -25,14 +32,28 @@ export const SideMenu = () => {
           <Drawer.Positioner>
             <Drawer.Content>
               <Drawer.CloseTrigger asChild>
-                <CloseButton className='closebtn' size='2xl' />
+                <CloseButton className='closebtn' size='lg' />
               </Drawer.CloseTrigger>
               <Drawer.Body padding={'0'}>
                 <VStack className='sidemenu'>
-                  <a href='#work' onClick={sideclose}>Portfolio</a>
-                  <a href='#skills' onClick={sideclose}>Skills</a>
-                  <a href='#services' onClick={sideclose}>Services</a>
-                  <a href='#about' onClick={sideclose}>About me</a>
+                  
+                  {isHome ? 
+                    <>
+                    <Link to='/' onClick={sideclose}>Home</Link>
+                    <Link to='/work' onClick={sideclose}>Portfolio</Link>
+                    <AnchorLink href='#skills' onClick={sideclose}>Skills</AnchorLink>
+                    <AnchorLink href='#services' onClick={sideclose}>Services</AnchorLink>
+                    <AnchorLink href='#about' onClick={sideclose}>About me</AnchorLink>
+                    </>
+                    : 
+                    <>
+                      <Link to='/' onClick={sideclose}>Home</Link>
+                    <Link to='/work' onClick={sideclose}>Portfolio</Link>
+                    <Link to='/#skills' onClick={sideclose}>Skills</Link>
+                    <Link to='/#services' onClick={sideclose}>Services</Link>
+                    <Link to='/#about' onClick={sideclose}>About me</Link>
+                    </>
+                    }
                 </VStack>
               </Drawer.Body>
             </Drawer.Content>
